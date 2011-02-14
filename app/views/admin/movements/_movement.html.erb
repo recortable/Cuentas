@@ -1,0 +1,20 @@
+<%= div_for movement do %>
+<div class="property">
+    <%= movement.d.mday %>/<%= movement.d.month %>/<%= link_to movement.d.year, "(@account, movement.d.year)" %>
+</div>
+<div class="property number">
+    <%= euros_of movement.ammount, :class => "value #{(movement.ammount > 0 ? 'green' : 'red')}" %>
+</div>
+<div class="property number">
+    <span class="ammount"><%= euros movement.balance %></span>
+</div>
+<div class="property concept">
+    <%= movement.concept %>
+</div>
+<% if movement.comments?  %>
+<% movement.comments.each_line do |comment| %>
+<%= comment %>
+<br/>
+<% end %>
+<% end %>
+<% end%>

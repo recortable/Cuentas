@@ -1,0 +1,3 @@
+<%= div_for account do %>
+  <%= account.complete_number %> (<%= account.users.map{|u| u.name}.join(' ') %>)
+<% end%>
