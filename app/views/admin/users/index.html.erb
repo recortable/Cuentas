@@ -1,9 +1,11 @@
-<%= title 'Usuarios' %>
+<%= title 'Users' %>
 
-<table>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= user.login %></td>
-    </tr>
+<% @users.each do |user| %>
+  <%= div_for user do %>
+    <div class="property string name"><%= user.name %></div>
+    <div class="property email"><%= user.email %></div>
+    <% user.authorizations.each do |auth| %>
+      <div class="property string authorization"><%= auth.provider %> <%= l auth.created_at %></div>
     <% end %>
-</table>
+  <% end %>
+<% end %>

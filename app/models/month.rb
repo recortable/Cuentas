@@ -1,6 +1,6 @@
 
 # Resúmenes mensuales
-class MonthSummary < ActiveRecord::Base
+class Month < ActiveRecord::Base
   belongs_to :account
   before_save :calculate
 
@@ -13,7 +13,7 @@ class MonthSummary < ActiveRecord::Base
   end
 
   def balance
-    @balance ||= positive_ammount + negative_ammount
+    @balance ||= after_balance - before_balance
   end
 
   def begin_date
@@ -29,7 +29,7 @@ class MonthSummary < ActiveRecord::Base
   end
 
   def self.get(account_id, year, month)
-    MonthSummary.find_or_create_by_account_id_and_year_and_month(account_id, year, month)
+    Month.find_or_create_by_account_id_and_year_and_month(account_id, year, month)
   end
 
   private

@@ -7,6 +7,8 @@ gem "simple_form"
 gem "cancan"
 gem 'inherited_resources'
 gem 'newrelic_rpm'
+gem 'kaminari'
+gem "meta_where"
 
 gem 'capistrano'
 gem 'ruby-debug19'

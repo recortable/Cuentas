@@ -1,0 +1,13 @@
+<% div_for month do %>
+  <h2>
+    <a href="<%= account_month_path(month.account, month) %>"><%= "#{month.month}/#{month.year}" %> <%= mes(month.month) %></a>
+    <span class="property balance number <%= month.type %>"><%= euros month.balance %></span>
+    <span>(</span><span class="property number"><%= euros month.before_balance %> a </span> 
+    <span class="property number"><%= euros month.after_balance %></span><span>)</span>
+  </h2>
+  <div class="ammounts">
+    <span class="property number positive"><label>Ingresos:</label><%= euros month.positive_ammount %></span>
+    <span class="property number negative"><label>Gastos:</label><%= euros month.negative_ammount, :absolute => true %></span>
+  </div>
+
+<% end %>

@@ -3,6 +3,14 @@ Cuentas::Application.routes.draw do
   match "/auth/:provider/callback" => "sessions#create"
   match "/cerrar" => "sessions#destroy", :as => :logout
   match "/identificarse" => "sessions#new", :as => :login
+  
+  resources :accounts do
+    resources :months
+    resources :years    
+    resources :actions
+    resource :import
+    resources :tags
+  end
 
   namespace :admin do
     resources :users

@@ -1,0 +1,15 @@
+<div class="actions">
+  <%= link_to t('.edit'), edit_account_path(@account) %>
+  <%#= link_to t('.import'), new_account_import_path(@account) %>
+</div>
+<%= @account.complete_number %> (<%= @account.users.map { |u| u.name }.join(' ') %>)
+<%= title t('.title', :name => @account.name) %>
+<div class="reports">
+  <h2>Informes</h2>
+  <% @account.years.each do |year| %>
+    <%= link_to year, account_year_path(@account, year), :class => 'year_summary' %>
+    <% end -%>
+</div>
+
+<%= render @account.month_summaries %>
+

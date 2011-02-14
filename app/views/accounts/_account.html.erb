@@ -1,0 +1,11 @@
+<% div_for account do %>
+  <h2><%= link_to account.name, [account, :months] %></h2>
+  <div class="users">
+    <% account.users.each do |user| %><%= content_tag :span, user.name %><% end %>
+  </div>
+  <p><label>Número:</label><%= account.complete_number %></p>
+  <p><label>Propietario:</label><%= account.owner %></p>
+  <p><label>Dirección:</label><%= account.owner_address %></p>
+  <p><label>BIC:</label><%= account.bic %></p>
+  <p><label>IBAN:</label><%= account.iban %></p>
+<% end %>

@@ -1,0 +1,10 @@
+<% title "#{mes(@month.month)} #{@month.year}" %>
+<h1><%= mes(@month.month) %> <%= link_to @month.year, [@account, :months] %></h1>
+<h3>Balance: <%= euros @month.balance %></h3>
+<h2>Desde el <%= @month.begin_date.mday %> de <%= mes @month.begin_date.month %> de <%= @month.begin_date.year %>
+  (<%= euros @month.before_balance %>)</h2>
+
+<%= render @month.movements %>
+
+<h2>Hasta el <%= @month.end_date.mday %> de <%= mes @month.end_date.month %> de <%= @month.end_date.year %>
+  (<%= euros @month.after_balance %>)</h2>

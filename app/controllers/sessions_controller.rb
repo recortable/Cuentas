@@ -11,4 +11,9 @@ class SessionsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def destroy
+    self.clear_user
+    redirect_to root_path
+  end
 end

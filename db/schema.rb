@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100413035812) do
+ActiveRecord::Schema.define(:version => 20110214194726) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -27,6 +27,24 @@ ActiveRecord::Schema.define(:version => 20100413035812) do
     t.datetime "updated_at"
   end
 
+  create_table "activities", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "account_id"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.string   "action",        :limit => 16
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "authorizations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "holders", :force => true do |t|
     t.integer  "user_id"
     t.integer  "account_id"
@@ -35,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20100413035812) do
     t.datetime "updated_at"
   end
 
-  create_table "month_summaries", :force => true do |t|
+  create_table "months", :force => true do |t|
     t.integer  "account_id"
     t.integer  "year"
     t.integer  "month"
@@ -49,8 +67,8 @@ ActiveRecord::Schema.define(:version => 20100413035812) do
     t.datetime "updated_at"
   end
 
-  add_index "month_summaries", ["month"], :name => "index_month_summaries_on_month"
-  add_index "month_summaries", ["year"], :name => "index_month_summaries_on_year"
+  add_index "months", ["month"], :name => "index_month_summaries_on_month"
+  add_index "months", ["year"], :name => "index_month_summaries_on_year"
 
   create_table "movements", :force => true do |t|
     t.integer  "account_id"
@@ -84,15 +102,9 @@ ActiveRecord::Schema.define(:version => 20100413035812) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.string   "login"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token"
-    t.integer  "login_count"
+    t.string   "email"
     t.datetime "last_login_at"
-    t.datetime "current_login_at"
     t.string   "last_login_ip"
-    t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
