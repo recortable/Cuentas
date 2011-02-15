@@ -1,6 +1,6 @@
-
 # Resúmenes mensuales
 class Month < ActiveRecord::Base
+  default_scope :order => 'year ASC, month ASC'
   belongs_to :account
   before_save :calculate
 
@@ -24,6 +24,14 @@ class Month < ActiveRecord::Base
     @end_date ||= begin_date + 1.month - 1.day
   end
 
+  def balance_before
+    before_balance
+  end
+
+  def balance_after
+    after_balance
+  end
+
   def to_param
     "#{year}-#{month}"
   end
@@ -32,14 +40,15 @@ class Month < ActiveRecord::Base
     Month.find_or_create_by_account_id_and_year_and_month(account_id, year, month)
   end
 
-  private
   def calculate
+    self.movements_count = self.movements.count
     self.positive_ammount = 0
     self.negative_ammount = 0
-    all = self.movements
-    if all.count > 0
-      self.before_balance = all.last.balance
-      self.after_balance = all.first.balance
+    all                   = self.movements.order('date asc')
+    if self.movements_count > 0
+      last                = all.last
+      self.before_balance = all.first.balance_before
+      self.after_balance  = last.balance_after
       all.each do |movement|
         if movement.ammount >= 0
           self.positive_ammount = self.positive_ammount + movement.ammount
@@ -48,9 +57,7 @@ class Month < ActiveRecord::Base
         end
       end
     else
-      last = account.movements.first
-      self.before_balance = last.balance
-      self.after_balance = last.balance
+
     end
   end
 end

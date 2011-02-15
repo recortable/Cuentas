@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214194726) do
+ActiveRecord::Schema.define(:version => 20110215002114) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20110214194726) do
     t.string   "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "movements_count",  :default => 0
   end
 
   add_index "months", ["month"], :name => "index_month_summaries_on_month"
@@ -107,6 +108,20 @@ ActiveRecord::Schema.define(:version => 20110214194726) do
     t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "years", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "number"
+    t.integer  "positive_ammount", :default => 0
+    t.integer  "negative_ammount", :default => 0
+    t.integer  "before_ammount",   :default => 0
+    t.integer  "after_ammount",    :default => 0
+    t.string   "tag_summary"
+    t.string   "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "movements_count",  :default => 0
   end
 
 end

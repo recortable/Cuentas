@@ -2,6 +2,12 @@
 
 
 module MoneyHelper
+
+  def number_class(number)
+    number > 0 ? 'positive' : 'negative'
+  end
+
+
   def euros_of(number, options = {})
     clazz = options[:class] ? options[:class] : ''
     clazz = clazz + " #{(number >= 0 ? 'positive ammount' : 'negative ammount')}"
@@ -13,6 +19,7 @@ module MoneyHelper
     # default format: $12,345,678.90
     options = {:currency_symbol => " €", :delimiter => ".", :decimal_symbol => ",", :currency_before => false, :absolute => false}.merge(options)
     number  = number.abs if options[:absolute]
+    number = number.to_f
 
     # split integer and fractional parts
     int, frac = ("%.2f" % (number / 100)).split('.')

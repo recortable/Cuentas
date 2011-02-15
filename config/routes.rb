@@ -6,7 +6,9 @@ Cuentas::Application.routes.draw do
   
   resources :accounts do
     resources :months
-    resources :years    
+    resources :years do
+      put 'calculate_months', :on => :member
+    end
     resources :actions
     resource :import
     resources :tags

@@ -1,0 +1,24 @@
+<li class="movement">
+  <div class="properties">
+    <p class="property date"><%= movement.d.mday %>/<%= movement.d.month %>
+      /<%= link_to movement.d.year, account_year_path(@account, movement.d.year) %></p>
+
+    <p class="property number ammount"><%= euros_of movement.ammount, :class => "value #{(movement.ammount > 0 ? 'positive' : 'negative')}" %></p>
+
+    <p class="property number balance"><span class="ammount"><%= euros movement.balance_before %></span></p>
+
+    <p class="property number balance"><span class="ammount"><%= euros movement.balance_after %></span></p>
+
+    <p class="property string concept"><%= movement.concept %></p>
+  </div>
+
+  <div id="tagging_movement_<%= movement.id %>" class="tags taggings"><%= render movement.taggings %></div>
+  <div class="comments" id="comments-<%= movement.id %>">
+    <% if movement.comments? %>
+      <% movement.comments.each_line do |comment| %>
+        <%= comment %>
+        <br/>
+      <% end %>
+    <% end %>&nbsp;
+  </div>
+</li>

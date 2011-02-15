@@ -1,0 +1,20 @@
+<div id="calc_graph"></div>
+
+
+<ul>
+  <%= render movements %>
+</ul>
+
+<% content_for :tools do %>
+  <% form_for :bulk_action, :url => account_actions_path(@account), :html => {:class=> 'action_manager'} do |form| %>
+    <div>
+      <div class="actions">
+        Seleccionar: <a class="select_all" href="#">todos</a> <a class="select_none" href="#">ninguno</a>
+      </div>
+      <%= form.hidden_field :movement_ids %>
+      Aplicar la siguiente etiqueta: <%= select 'bulk_action', :label, @account.tags.collect { |t| [t.name, t.id] } %> a
+      los
+      <span class="selected_counter">0</span> elementos seleccionados <%= form.submit 'Venga!' %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,116 @@
+/*
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 3.3.0
+build: 3167
+*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+/** CONSTANTS **/
+@white: #f9f9f9;
+@bg: #818176;
+@darkbg: #6e6c5e;
+@darkerbg: #403f37;
+@lightbg: #8e8e80;
+@font-sans-lucida: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans serif;
+@font-sans-helvetica: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans serif;
+@font-sans-arial: Arial, Helvetica, sans-serif;
+@font-sans-nobile: 'Nobile', arial, serif;
+@font-sans: 'Nobile', arial, serif;
+@font-serif: 'Goudy Bookletter 1911', arial, serif;
+
+
+@font-title: 'Lobster', arial, serif;
+
+/** HELPERS **/
+.container {width: 100%; overflow: hidden;}
+.shadow {text-shadow: 0 1px 0 @darkbg;}
+.positive {color: #336600;}
+.negative {color: #7c2900;}
+.ammount {color:@darkerbg;}
+
+.button {
+  border-radius: 3px;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#E5E5E5));
+  line-height: 2em;
+  padding: 0em 0.5em;
+  margin: 0 3px;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#E5E5E5));
+  color: #555;
+  border: 1px solid #CCC;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+  cursor: default;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+
+/** ELEMENTS **/
+html{background-color: @bg; color: @white; font-family: @font-sans; }
+h1 {font-family: @font-title; font-size: 300%; margin-top: 1em; .shadow;}
+h2 {font-family: @font-title; font-size: 200%; margin-top: 1em; .shadow;}
+h3 {font-size: 150%; margin-top: 1em; .shadow;}
+a {text-decoration: none; color: @white;}
+p {.shadow; margin: 0.5em 0;}
+form input[type=submit] {.button;}
+
+/** LAYOUT **/
+.side-bar {position:fixed;top:0;bottom:0;width:11em;padding:1em 0.5em 0 0.5em;
+background-color: @darkbg;border:1px solid @lightbg; font-size:120%; }
+#user_bar {.side-bar;left:0;}
+#NObar {position: fixed; left: 0; top: 0; bottom: 10px; width: 11em;
+  border-right: 1px solid @lightbg; border-bottom: 1px solid @lightbg;
+  nobox-shadow: 1px 1px 3px @darkerbg; padding: 1em 0.5em 0 0.5em; border-bottom-right-radius: 10px; }
+#center {position:absolute;left:14em; right: 14em; top: 0; bottom: 0;}
+#info {padding:2em 0;}
+#tools {.side-bar;right:0;}
+
+/** USER BAR **/
+#user_bar {text-align: right;}
+#user_bar h1 {font-size: 150%; margin-top: 0.4em; }
+#session h1 {border-bottom: 1px solid @lightbg;}
+#session a {display:block; font-family: @font-title;}
+
+/** TOOLS **/
+
+
+/** CENTER **/
+#center {font-size:95%;}
+#center .column-1 {width: 90%; margin: 0 auto;}
+div.actions {.container;margin-bottom: 1em;}
+div.actions input[type=submit] {float: left;}
+div.actions a {display: block; float: left; .button; }
+
+/** TABLES **/
+table {width:100%; background-color:@darkbg;  overflow: hidden; padding: 3px; }
+table thead {background-color: @darkbg;}
+table tr.movement {border-top: 1px solid @darkerbg;}
+table tr.comments {border-bottom: 1px solid @lightbg; background-color: @darkbg;}
+table td {padding:3px;}
+table tbody {}
+
+/** PROPERTIES **/
+dl {margin: 5px;}
+dt {float: left; padding-right: 0.5em;}
+.year dl {color: @darkerbg;}
+.year dd {float: left; padding-right:1em;}
+/** MODELS **/
+.tile {background-color:@darkbg; border-bottom:1px solid @lightbg; border-right:1px solid @lightbg;}
+.months {.container;}
+.months .month {float: left; width: 9em; overflow:hidden; margin-right: 0.1em; .tile; text-align:center;}
+.month h2 {margin:0;}
+.month .property {height:1.5em; overflow:hidden;margin: -5px 0 0 2px; padding:0;}
+
+h2 span {font-size: 50%;}
+.movement {margin: 3px 0; padding: 0 5px 3px 10px;.tile;}
+.movement .properties {.container; }
+.movement p {float: left;}
+.movement  .property.date {width: 6em; }
+.movement .property.ammount {width: 6em;}
+.movement .property.balance {width: 6em;}
+.movement .comments {margin-left: 2em; font-size: 80%;}
+
+.tags {.container;}
+.tagging {display:block;float:left;padding:0.3em 0.8em; margin: 3px 3px 0 0; font-size: 80%;border-radius: 3px; opacity:0.6;}
+.tagging a {color: black; }

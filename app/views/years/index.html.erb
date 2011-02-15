@@ -1,0 +1,16 @@
+<%= title 'Resúmen por años' %>
+
+<%= form_tag account_path(@account), :method => :put do %>
+  <% submit_tag 'Actualizar años' %>
+<% end %>
+
+<% @years.each do |year| %>
+  <%= div_for year do %>
+    <h2><%= link_to year.number, [@account, year] %></h2>
+    <%= render :partial => 'years/properties', :locals => {:year => year} %>
+    <div class="months">
+      <% months = @months_by_years[year.number] %>
+      <%= render months if months %>
+    </div>
+  <% end %>
+<% end %>

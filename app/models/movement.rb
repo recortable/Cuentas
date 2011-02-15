@@ -1,5 +1,4 @@
 class Movement < ActiveRecord::Base
-  default_scope :order => 'DATE desc, id desc'
   validates_presence_of :account_id, :date, :ammount, :balance, :concept
   before_save :generate_code
   belongs_to :account
@@ -24,9 +23,14 @@ class Movement < ActiveRecord::Base
     ammount < 0 ? 'negative' : 'positive'
   end
 
-  def before_balance
+  def balance_before
     balance - ammount
   end
+
+  def balance_after
+    balance
+  end
+
 
   def generate_code
     self.code = "#{self.date}#{self.ammount}#{self.balance}"

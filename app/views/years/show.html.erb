@@ -1,0 +1,15 @@
+<% title @year.number.to_s %>
+<h1><%= link_to @year.number, [@account, :months] %></h1>
+
+<%= render :partial => 'properties', :locals => {:year => @year, :movements => true} %>
+
+<div class="actions">
+  <% form_for [@account, @year] do |form| %><%= form.submit 'Actualizar año' %>
+  <% end %>
+  <%= form_tag calculate_months_account_year_path(@account, @year), :method => :put do %>
+    <% submit_tag 'Actualizar meses' %>
+  <% end %>
+</div>
+<div class="months">
+  <%= render @year.months if @year.months %>
+</div>
