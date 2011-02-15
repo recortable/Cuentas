@@ -1,0 +1,63 @@
+<%= title 'Importar movimientos' %>
+
+
+<% if !@import or !@import.valid? %>
+  Último movimiento: <%= @account.movements.last.d.fecha %>
+  <% form_tag(preview_account_import_path(@account), :class => 'import') do %>
+    <%= text_area_tag :import, params[:import] %>
+    <%= submit_tag 'Vista previa' %>
+  <% end %>
+<% else %>
+  <div class="properties">
+    <p class="records_to_import"><label>Movimientos que se van a importar:</label><%= @import.records_to_import %></p>
+
+    <p class="red"><label>Número de elementos duplicados:</label><%= @import.records_duplicated %></p>
+  </div>
+
+  <% if @import.errors? %>
+    <div class="import errors">
+      <% @import.errors.each do |error| %>
+        <p><%= error %></p>
+        </div>
+      <% end %>
+  <% else %>
+    <% form_tag(account_import_path(@account)) do %>
+      <%= hidden_field_tag :import, params[:import] %>
+      <table>
+        <thead>
+        <tr>
+          <td>Estado</td>
+          <td>Fecha</td>
+          <td>Cantidad</td>
+          <td>Saldo</td>
+          <td>Concepto</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @import.movements.reverse.each_with_index do |movement, index| %>
+          <tr>
+            <td class="import_state <%= movement.import %>">
+              <%= t("import.state.#{movement.import}") %>
+              <% if movement.import? %>
+                <%= hidden_field_tag 'movement[][date]', movement.date, :id => "movement_date_#{index}" %>
+                <%= hidden_field_tag 'movement[][ammount]', movement.ammount, :id => "movement_ammount_#{index}" %>
+                <%= hidden_field_tag 'movement[][balance]', movement.balance, :id => "movement_balance_#{index}" %>
+                <%= hidden_field_tag 'movement[][concept]', movement.concept, :id => "movement_concept_#{index}" %>
+              <% end %>
+            </td>
+            <td><%= movement.fecha %></td>
+            <td><%= euros movement.ammount %></td>
+            <td><%= euros movement.balance %></td>
+            <td><%= movement.concept %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% if @import.valid? %>
+        <%= submit_tag 'Importar movimientos' %>
+      <% else %>
+        <%= submit_tag 'Importar movimientos', :disabled => 'disabled' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

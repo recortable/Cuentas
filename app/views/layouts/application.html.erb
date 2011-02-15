@@ -31,7 +31,7 @@
     <% if @account %>
       <%= content_tag :h2, @account.name %>
       <div class="actions">
-        <%= link_to 'Editar datos de la cuenta' %>
+        <%= link_to 'Editar datos de la cuenta', edit_account_path(@account) %>
         <%= link_to 'Importar movimientos', new_account_import_path(@account) %>
       </div>
 

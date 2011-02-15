@@ -1,4 +1,9 @@
 es:
+  import:
+    state:
+      import: "Válido"
+      duplicate: "Duplicado"
+      
   months:
     month-1: Ene
     month-2: Feb

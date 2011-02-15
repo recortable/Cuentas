@@ -1,0 +1,14 @@
+<%= simple_form_for @account do |form| %>
+  <%= form.input :name %>
+  <%= form.input :address %>
+  <%= form.input :entity_code %>
+  <%= form.input :office_code %>
+  <%= form.input :control_code %>
+  <%= form.input :number %>
+  <%= form.input :owner %>
+  <%= form.input :owner_address %>
+  <div class="controls">
+    <%= form.submit 'Guardar' %>
+    <%= link_to 'Cancelar', (@account.new_record? ? accounts_path : @account) %>
+  </div>
+<% end %>

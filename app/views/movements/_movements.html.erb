@@ -6,15 +6,18 @@
 </ul>
 
 <% content_for :tools do %>
-  <% form_for :bulk_action, :url => account_actions_path(@account), :html => {:class=> 'action_manager'} do |form| %>
-    <div>
-      <div class="actions">
-        Seleccionar: <a class="select_all" href="#">todos</a> <a class="select_none" href="#">ninguno</a>
+  <div class="movement_tools">
+    <h2>Seleccionados: <span class="selected_counter">0</span></h2>
+    <a class="select_all" href="#">todos</a> <a class="select_none" href="#">ninguno</a>
+
+    <h2>Etiquetas</h2>
+    <% form_for :bulk_action, :url => account_actions_path(@account) do |form| %>
+      <div>
+        <%= form.hidden_field :movement_ids %>
+        Aplicar : <%= select 'bulk_action', :label, @account.tags.collect { |t| [t.name, t.id] } %>
+        <br/>
+        a los elementos seleccionados <%= form.submit 'Vamos!' %>
       </div>
-      <%= form.hidden_field :movement_ids %>
-      Aplicar la siguiente etiqueta: <%= select 'bulk_action', :label, @account.tags.collect { |t| [t.name, t.id] } %> a
-      los
-      <span class="selected_counter">0</span> elementos seleccionados <%= form.submit 'Venga!' %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <% end %>

@@ -10,7 +10,9 @@ Cuentas::Application.routes.draw do
       put 'calculate_months', :on => :member
     end
     resources :actions
-    resource :import
+    resource :import do
+      post 'preview'
+    end
     resources :tags
   end
 
