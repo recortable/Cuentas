@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     if @auth
       self.current_user = @auth.user
       redirect_to root_path
+      Activity.create(:user_id => current_user.id, :action => 'create', :resource_type => 'Session')
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215002114) do
+ActiveRecord::Schema.define(:version => 20110215151107) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -104,10 +104,9 @@ ActiveRecord::Schema.define(:version => 20110215002114) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "last_login_at"
-    t.string   "last_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "rol",        :limit => 8
   end
 
   create_table "years", :force => true do |t|

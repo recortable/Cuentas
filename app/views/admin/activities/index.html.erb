@@ -1,0 +1,7 @@
+<%= title 'Actividad' %>
+
+<% @activities.each do |activity| %>
+    <div class="activity">
+      <%= t("activity.#{activity.resource_type}.#{activity.action}", :user => activity.user.name) %>
+    </div>
+<% end %>

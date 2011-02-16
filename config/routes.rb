@@ -1,8 +1,13 @@
 Cuentas::Application.routes.draw do
+  get "activities/index"
+
+  get "activities/destroy"
+
   root :to => "dashboard#show"
   match "/auth/:provider/callback" => "sessions#create"
   match "/cerrar" => "sessions#destroy", :as => :logout
   match "/identificarse" => "sessions#new", :as => :login
+  match "/admin" => "admin/activities#index"
   
   resources :accounts do
     resources :months
@@ -20,6 +25,7 @@ Cuentas::Application.routes.draw do
     resources :users
     resources :accounts
     resources :movements
+    resources :activities
   end
 end
 

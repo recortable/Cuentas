@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 
 module AuthModule
   protected
@@ -13,9 +15,12 @@ module AuthModule
   end
 
   def require_admin
-    unless current_user
+    if !current_user
       store_location
       redirect_to login_path
+    elsif current_user.rol != 'admin'
+      flash[:alert] = "No tienes permisos para andar por ahí..."
+      redirect_to root_path
     end
   end
 
@@ -24,7 +29,7 @@ module AuthModule
   end
 
   def stored_or(default_path)
-    path = session[:return_to] || default_path
+    path                = session[:return_to] || default_path
     session[:return_to] = nil
     path
   end
@@ -34,12 +39,13 @@ module AuthModule
   end
 
   def clear_user
-    @current_user = nil
+    @current_user     = nil
     session[:user_id] = nil
   end
 
   def current_user=(user)
-    @current_user = user
+    @current_user     = user
     session[:user_id] = user.id
   end
+
 end

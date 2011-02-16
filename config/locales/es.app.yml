@@ -3,6 +3,9 @@ es:
     state:
       import: "Válido"
       duplicate: "Duplicado"
+  activity:
+    Session:
+      create: "%{user} ha creado una nueva sesión"
       
   months:
     month-1: Ene

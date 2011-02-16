@@ -20,7 +20,6 @@ class AccountsController < ApplicationController
 
   def update
     @account = current_user.accounts.find params[:id]
-    
     @account.update_attributes(params[:account])
     redirect_to [@account, :months]
   end

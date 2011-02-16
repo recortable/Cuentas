@@ -17,7 +17,8 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 @medbg: #78776a;
 @lightbg: #8e8e80;
 @yellow: #c0c03a;
-
+@red: #336600;
+@green: #7c2900;
 @font-sans-lucida: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans serif;
 @font-sans-helvetica: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans serif;
 @font-sans-arial: Arial, Helvetica, sans-serif;
@@ -31,8 +32,8 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 /** HELPERS **/
 .container {width: 100%; overflow: hidden;}
 .shadow {text-shadow: 0 1px 0 @darkbg;}
-.positive {color: #336600;}
-.negative {color: #7c2900;}
+.positive {color: @red;}
+.negative {color: @green;}
 .ammount {color:@darkerbg;}
 .actual {color: @black;}
 
@@ -88,6 +89,11 @@ background-color: @darkbg;border:1px solid @lightbg; font-size:120%; }
 #tools h2 span {font-size: 100%;}
 
 /** CENTER **/
+.flash {.tile; padding: 5px 8px; margin: 10px 0; border-radius: 3px;}
+.flash a {color:@darkerbg;}
+#flash_notice { background-color: @yellow; color: @darkerbg; }
+#flash_error, #flash_alert { background-color: @red; color: @white; }
+.navigation {font-size:80%; color: @darkbg;}
 #center {font-size:95%;}
 #center .column-1 {width: 90%; margin: 0 auto;}
 div.actions {.container;margin-bottom: 1em;}

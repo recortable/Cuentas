@@ -18,22 +18,46 @@
   <div id="info">
   </div>
   <% if current_user %>
-    <div id="session">
-      <h1><%= current_user.name %></h1>
-      <% current_user.accounts.each do |account| %><%= link_to account.name, [account, :years] %>
-      <% end %>
-    </div>
+      <div id="session">
+        <h1><%= current_user.name %></h1>
+        <%= link_to 'Perfil', '#' %>
+        <%= link_to 'Salir', logout_path %>
+
+        <h1>Cuentas</h1>
+        <% current_user.accounts.each do |account| %><%= link_to account.name, [account, :years] %>
+        <% end %>
+        <% if current_user.admin? %>
+            <h1>Admin</h1>
+            <%= link_to 'Actividad', admin_activities_path %>
+            <%= link_to 'Usuarios', admin_users_path %>
+        <% end %>
+      </div>
 
   <% end %>
 </div>
 <div id="center">
   <div class="column-1">
+    <% flash.each do |name, msg| %>
+        <%= content_tag :div, :id => "flash_#{name}", :class => 'flash' do %>
+            <%= msg %>
+            <%= content_tag :span, :style => "float: right;" do %>
+                <%= link_to_function 'x',
+                                     :onclick => "document.getElementById('flash_#{name}').style.display='none'" %>
+            <% end %>
+        <% end %>
+    <% end %>
+
     <% if @account %>
-      <%= content_tag :h2, @account.name %>
-      <div class="actions">
-        <%= link_to 'Editar datos de la cuenta', edit_account_path(@account) %>
-        <%= link_to 'Importar movimientos', new_account_import_path(@account) %>
-      </div>
+        <div class="navigation">
+          <%= link_to 'Movimientos', account_months_path(@account) %> |
+          <%= link_to 'Por años', account_years_path(@account) %> :
+          <%= Time.now.year %>
+        </div>
+        <%= content_tag :h2, @account.name %>
+        <div class="actions">
+          <%= link_to 'Editar datos de la cuenta', edit_account_path(@account) %>
+          <%= link_to 'Importar movimientos', new_account_import_path(@account) %>
+        </div>
 
     <% end %>
     <%= yield %>
@@ -44,7 +68,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js">
 </script>
 <script type="text/javascript">
-  !window.jQuery && document.write('<script src="/javascripts/jquery-1.4.4.min.js"><\/script>')
+    !window.jQuery && document.write('<script src="/javascripts/jquery-1.4.4.min.js"><\/script>')
 </script>
 <%= javascript_include_tag 'plugins.js', 'scripts.js' %>
 </body>
