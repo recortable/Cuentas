@@ -3,6 +3,10 @@ es:
     state:
       import: "Válido"
       duplicate: "Duplicado"
+    errors:
+      different_accounts: "Las cuentas de origen y destino son diferentes!"
+      invalid_header: "Los datos de la cabecera no son válidos"
+      no_header: "Faltan la cabecera en los datos de importación (probablemente un error al copiar y pegar)"
   activity:
     Session:
       create: "%{user} ha creado una nueva sesión"

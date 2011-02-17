@@ -1,7 +1,7 @@
 <%= title 'Importar movimientos' %>
 
 
-<% if !@import or !@import.valid? %>
+<% if !@import  %>
   Último movimiento: <%= @account.movements.last.d.fecha %>
   <% form_tag(preview_account_import_path(@account), :class => 'import') do %>
     <%= text_area_tag :import, params[:import] %>
@@ -28,6 +28,7 @@
         <tr>
           <td>Estado</td>
           <td>Fecha</td>
+          <td>Código</td>
           <td>Cantidad</td>
           <td>Saldo</td>
           <td>Concepto</td>
@@ -46,6 +47,7 @@
               <% end %>
             </td>
             <td><%= movement.fecha %></td>
+            <td><%= movement.code %></td>
             <td><%= euros movement.ammount %></td>
             <td><%= euros movement.balance %></td>
             <td><%= movement.concept %></td>

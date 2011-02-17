@@ -2,7 +2,7 @@ class Account < ActiveRecord::Base
   validates_presence_of :number, :office_code, :entity_code, :control_code, :name, :owner
   #before_save :calculate
   has_many :holders
-  has_many :movements, :order => 'DATE'
+  has_many :movements
   has_many :months#, :order => 'YEAR desc, MONTH desc, ID desc'
   has_many :years, :order => 'NUMBER desc'
   has_many :tags
@@ -21,7 +21,7 @@ class Account < ActiveRecord::Base
   end
 
   def movements_between(begin_date, end_date)
-    Movement.where(:account_id => self.id, :date.gt => begin_date.to_db, :date.lte => end_date.to_db).order('date')
+    Movement.where(:account_id => self.id, :date.gte => begin_date.to_db, :date.lte => end_date.to_db).order('date')
   end
 
   def to_param

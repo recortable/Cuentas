@@ -49,9 +49,10 @@
 
     <% if @account %>
         <div class="navigation">
-          <%= link_to 'Movimientos', account_months_path(@account) %> |
+          <%= link_to 'Movimientos', account_movements_path(@account) %> |
+          <%= link_to 'Etiquetas', account_tags_path(@account) %> |
           <%= link_to 'Por años', account_years_path(@account) %> :
-          <%= Time.now.year %>
+          <% @account.years.each do |year| %><%= link_to year.number, [@account, year] %> <% end %>
         </div>
         <%= content_tag :h2, @account.name %>
         <div class="actions">

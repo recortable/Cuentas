@@ -1,0 +1,7 @@
+<%= title 'Etiquetas' %>
+
+<% @tags.each do |tag| %>
+    <%= div_for tag do %>
+        <h2><%= link_to tag.name, [@account, tag] %></h2>
+    <% end %>
+<% end %>

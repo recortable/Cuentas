@@ -1,7 +1,7 @@
-
 class Importer
   attr_reader :account_number, :account_name, :initial_balance, :movements, :end_balance
   attr_reader :errors, :records_to_import, :records_duplicated
+
   def initialize(account, text)
     @account = account
     @text = text
@@ -11,7 +11,7 @@ class Importer
     @records_to_import = 0
     @records_duplicated = 0
     parse
-    validate
+    validate if @account_number
   end
 
   def valid?
@@ -52,13 +52,18 @@ class Importer
   end
 
   def parse_header(line)
-    @account_number = line[2..19]
-    @begin_date = Date.from_nor43(line[20..25])
-    @end_date = Date.from_nor43(line[26..31])
-    @initial_balance = line[33..46].to_i
-    @current_balance = @initial_balance
-    @account_name = line[51..76]
-    add_error I18n.t('import.errors.different_accounts') if @account_number != @account.account_number
+    begin
+      @account_number = line[2..19]
+      @begin_date = Date.from_nor43(line[20..25])
+      @end_date = Date.from_nor43(line[26..31])
+      @initial_balance = line[33..46].to_i
+      @current_balance = @initial_balance
+      @account_name = line[51..76]
+      add_error I18n.t('import.errors.different_accounts') if @account_number != @account.account_number
+    rescue
+      @account_number = nil?
+      add_error I18n.t('import.errors.invalid_header')
+    end
   end
 
   def parse_movement_main(line)
@@ -73,7 +78,7 @@ class Importer
   end
 
   def parse_movement_optional(line)
-    @current.concept = line[4,79].strip
+    @current.concept = line[4, 79].strip
   end
 
   def parse_end(line)
@@ -92,7 +97,7 @@ class Importer
   def validate
     @stored = @account.movements_between(@begin_date, @end_date).all
     by_code = {}
-    @stored.each {|m| by_code[m.code] = m}
+    @stored.each { |m| by_code[m.code] = m }
 
     @movements.each do |movement|
       code = movement.generate_code

@@ -10,6 +10,8 @@ Cuentas::Application.routes.draw do
   match "/admin" => "admin/activities#index"
   
   resources :accounts do
+    resources :movements
+    resources :tags
     resources :months
     resources :years do
       put 'calculate_months', :on => :member
