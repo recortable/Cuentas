@@ -1,4 +1,4 @@
-<li class="movement">
+<li class="movement" id="movement-<%= movement.id %>">
   <div class="properties">
     <p class="property date"><%= movement.d.mday %>/<%= movement.d.month %>
       /<%= link_to movement.d.year, account_year_path(@account, movement.d.year) %></p>
@@ -12,13 +12,9 @@
     <p class="property string concept"><%= movement.concept %></p>
   </div>
 
-  <div id="tagging_movement_<%= movement.id %>" class="tags taggings"><%= render movement.taggings %></div>
+  <div id="tags-<%= movement.id %>" class="tags taggings"><%= render movement.taggings %></div>
   <div class="comments" id="comments-<%= movement.id %>">
-    <% if movement.comments? %>
-      <% movement.comments.each_line do |comment| %>
-        <%= comment %>
-        <br/>
-      <% end %>
-    <% end %>&nbsp;
+    <%= link_to 'ண', [@account, movement, :comments], :class => 'add_comment' %>
+    <%= simple_format(movement.comments) if movement.comments? %>
   </div>
 </li>

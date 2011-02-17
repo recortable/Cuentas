@@ -1,0 +1,4 @@
+<% @action.taggings.each do |tagging| %>
+$("#tags-<%= tagging.movement.id %>").append("<%= escape_javascript(render tagging) %>");
+<% end %>
+

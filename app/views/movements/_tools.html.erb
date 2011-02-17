@@ -1,0 +1,23 @@
+<% content_for :tools do %>
+
+    <div class="movement_tools">
+      <h1>Movimientos</h1>
+
+      <h2>Buscar</h2>
+      <%= form_tag account_movements_path(@account), :method => :get do %>
+          <%= text_field_tag :q %>
+      <% end %>
+      <h2>Seleccionados: <span class="selected_counter">0</span></h2>
+      <a class="select_all" href="#">todos</a> <a class="select_none" href="#">ninguno</a>
+
+      <h2>Etiquetas</h2>
+      <% form_for BulkAction.new(:name => 'apply_label', :url => request.url), :url => account_actions_path(@account), :html => {:id => 'labelize'} do |form| %>
+          <%= form.hidden_field :name %>
+          <%= form.hidden_field :movement_ids %>
+          <%= form.hidden_field :url %>
+          <p>Aplicar : <%= form.select :tag_id, @account.tags.collect { |t| [t.name, t.id] } %></p>
+
+          <p>a los elementos seleccionados <%= form.submit 'Vamos!' %></p>
+      <% end %>
+    </div>
+<% end %>

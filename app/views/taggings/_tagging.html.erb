@@ -1,4 +1,5 @@
-<%= div_for(tagging, :style => "background-color: #{tagging.tag.color}" ) do %>
-<%= icon_link_to 'delete_small', 'c', "tagging_path(tagging, :format => 'js')", :class => 'delete_tagging', :id => "tagging_#{tagging.id}", :alt => "¿Quieres borrar la etiqueta '#{tagging.tag.name}' de #{tagging.movement.concept}?" %>
-<%= link_to tagging.tag.name, "user_account_tag_path(tagging.tag.account, tagging.tag)" %>
+<%= div_for(tagging, :style => "background-color: #{tagging.tag.color}") do %>
+    <%= link_to 'க', account_tagging_path(@account, tagging, :format => 'js'), :method => :delete,
+         :class => 'delete_tagging', :id => "delete_tagging_#{tagging.id}", :alt => "¿Quieres borrar la etiqueta '#{tagging.tag.name}' de #{tagging.movement.concept}?" %>
+    <%= link_to tagging.tag.name, account_tag_path(tagging.tag.account, tagging.tag) %>
 <% end %>

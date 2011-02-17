@@ -3,7 +3,12 @@ class MovementsController < ApplicationController
   respond_to :html
 
   def index
-    @movements = @account.movements.order('DATE desc').page params[:page]
+    if params[:q].present?
+      query = @account.movements.where(:concept.matches => "%#{params[:q]}%")
+    else
+      query = @account.movements
+    end
+    @movements = query.order('DATE desc').page params[:page]
     respond_with @movements
   end
 end

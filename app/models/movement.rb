@@ -4,7 +4,7 @@ class Movement < ActiveRecord::Base
   belongs_to :account
   attr_accessor :import
 
-  has_many :taggings
+  has_many :taggings, :include => :tag
   has_many :tags, :through => :taggings
 
   def fecha

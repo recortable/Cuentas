@@ -23,7 +23,8 @@
         <%= link_to 'Perfil', '#' %>
         <%= link_to 'Salir', logout_path %>
 
-        <h1>Cuentas</h1>
+
+        <h1><%= link_to 'Cuentas', accounts_path %></h1>
         <% current_user.accounts.each do |account| %><%= link_to account.name, [account, :years] %>
         <% end %>
         <% if current_user.admin? %>

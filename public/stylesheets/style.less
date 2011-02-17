@@ -123,12 +123,15 @@ h2 span {font-size: 50%;}
 .movement {margin: 3px 0; padding: 0 5px 3px 10px;.tile; }
 li.movement:hover {background-color: @medbg;}
 li.movement.selected {background-color:@yellow; }
+.movement {.container;}
 .movement .properties {.container; }
 .movement p {float: left;}
 .movement  .property.date {width: 6em; }
 .movement .property.ammount {width: 6em;}
 .movement .property.balance {width: 6em;}
 .movement .comments {margin-left: 2em; font-size: 80%;}
+.movement .comments a {float: left;}
+.movement .comments p {margin-top:0;}
 
 .tags {.container;}
 .tagging {display:block;float:left;padding:0.3em 0.8em; margin: 3px 3px 0 0; font-size: 80%;border-radius: 3px; opacity:0.6;}
@@ -141,3 +144,4 @@ form div.input label {float: left; width: 12em; text-align:right;margin-right:0.
 form input[type=text] {background-color:@whitesemi;}
 textarea {width:100%; height: 10em; background-color: @whitesemi; }
 form .controls {margin-left: 12.2em; .container; margin-top: 1em;}
+form #q {width:95%;margin: 2px; padding:2px; background-color: @lightbg; border: 1px solid @darkbg; color: @darkerbg;}

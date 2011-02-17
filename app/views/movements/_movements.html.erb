@@ -4,19 +4,4 @@
   <%= render movements %>
 </ul>
 
-<% content_for :tools do %>
-  <div class="movement_tools">
-    <h2>Seleccionados: <span class="selected_counter">0</span></h2>
-    <a class="select_all" href="#">todos</a> <a class="select_none" href="#">ninguno</a>
-
-    <h2>Etiquetas</h2>
-    <% form_for :bulk_action, :url => account_actions_path(@account) do |form| %>
-      <div>
-        <%= form.hidden_field :movement_ids %>
-        Aplicar : <%= select 'bulk_action', :label, @account.tags.collect { |t| [t.name, t.id] } %>
-        <br/>
-        a los elementos seleccionados <%= form.submit 'Vamos!' %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+<%= render :partial => 'movements/tools' %>
