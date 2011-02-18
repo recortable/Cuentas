@@ -7,6 +7,16 @@ class TagsController < ApplicationController
     respond_with @tags
   end
 
+  def new
+    @tag = @account.tags.build
+    respond_with @tag
+  end
+
+  def create
+    @tag = @account.tags.create(params[:tag])
+    redirect_to :back
+  end
+
   def show
     load_tag
     respond_with @tag
