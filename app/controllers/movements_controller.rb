@@ -8,7 +8,8 @@ class MovementsController < ApplicationController
     else
       query = @account.movements
     end
-    @movements = query.order('DATE desc').page params[:page]
+    @movements = query.order('DATE desc')
+    .page params[:page]
     respond_with @movements
   end
 end

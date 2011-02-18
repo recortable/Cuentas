@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215151107) do
+ActiveRecord::Schema.define(:version => 20110217231901) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(:version => 20110215151107) do
     t.string  "color",      :default => "#E1E4E4"
     t.integer "account_id"
     t.integer "size",       :default => 0
+    t.text    "report"
+    t.text    "comments"
   end
 
   create_table "users", :force => true do |t|

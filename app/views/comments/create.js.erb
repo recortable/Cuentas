@@ -1,1 +1,2 @@
-alert("así si!");
+$("#comments-<%= @movement.id %>").html("<%= escape_javascript(simple_format @movement.comments) %>");
+$(".spinner").remove();

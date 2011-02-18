@@ -3,6 +3,9 @@
 <head>
   <title><%= yield :title %><%= " - #{@account.name}" if @account %> - Cuentas</title>
   <%= csrf_meta_tag %>
+  <% if @account %>
+      <meta name="taggins_path" content="<%= account_taggings_path(@account) %>"/>
+  <% end %>
   <link rel="shortcut icon" href="/cezanne.ico">
   <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Nobile' rel='stylesheet' type='text/css'>
@@ -12,25 +15,39 @@
   </script>
 </head>
 <body>
-<div id="user_bar">
-  <h1><a href="/">Cuenta</a></h1>
-
-  <div id="info">
-  </div>
+<div id="navigation" class="horizontal-bar">
+  <% if @account %>
+      <%= form_tag account_movements_path(@account), :method => :get do %>
+          <div>Buscar:</div>
+          <%= text_field_tag :q %>
+          Por años:
+          <% @account.years.each do |year| %>
+              <%= link_to year.number, [@account, year] %>
+          <% end %>
+      <% end %>
+  <% end %>
+</div>
+<div id="user_bar" class="side-bar">
   <% if current_user %>
+      <h1>ஐ</h1>
+
       <div id="session">
-        <h1><%= current_user.name %></h1>
-        <%= link_to 'Perfil', '#' %>
-        <%= link_to 'Salir', logout_path %>
+        <h2><%= current_user.name %></h2>
 
+        <h3><%= link_to 'Perfil', '#' %></h3>
 
-        <h1><%= link_to 'Cuentas', accounts_path %></h1>
-        <% current_user.accounts.each do |account| %><%= link_to account.name, [account, :years] %>
+        <h3><%= link_to 'Salir', logout_path %></h3>
+
+        <h2><%= link_to 'Cuentas', accounts_path %></h2>
+        <% current_user.accounts.each do |account| %>
+            <h3><%= link_to account.name, [account, :years] %></h3>
         <% end %>
         <% if current_user.admin? %>
-            <h1>Admin</h1>
-            <%= link_to 'Actividad', admin_activities_path %>
-            <%= link_to 'Usuarios', admin_users_path %>
+            <h2>Admin</h2>
+
+            <h3><%= link_to 'Actividad', admin_activities_path %></h3>
+
+            <h3><%= link_to 'Usuarios', admin_users_path %></h3>
         <% end %>
       </div>
 
@@ -48,27 +65,58 @@
         <% end %>
     <% end %>
 
-    <% if @account %>
-        <div class="navigation">
-          <%= link_to 'Movimientos', account_movements_path(@account) %> |
-          <%= link_to 'Etiquetas', account_tags_path(@account) %> |
-          <%= link_to 'Por años', account_years_path(@account) %> :
-          <% @account.years.each do |year| %><%= link_to year.number, [@account, year] %> <% end %>
-        </div>
-        <%= content_tag :h2, @account.name %>
-        <div class="actions">
-          <%= link_to 'Editar datos de la cuenta', edit_account_path(@account) %>
-          <%= link_to 'Importar movimientos', new_account_import_path(@account) %>
-        </div>
 
-    <% end %>
     <%= yield %>
   </div>
   <div id="info"></div>
 </div>
-<div id="tools"><%= yield :tools %></div>
+<div id="account" class="side-bar">
+  <% if @account %>
+      <h1><%= @account.name %></h1>
+
+      <div><%= @account.complete_number %></div>
+      <h3></h3>
+
+      <div class="actions">
+        <%= link_to 'Editar', edit_account_path(@account) %>
+        <%= link_to 'Importar', new_account_import_path(@account) %>
+      </div>
+      <h2><%= link_to 'Movimientos', account_movements_path(@account) %></h2>
+
+      <h3><%= link_to 'Por años', account_years_path(@account) %></h3>
+
+
+      <h2><%= link_to 'Etiquetas', account_tags_path(@account) %></h2>
+
+      <div class="tags">
+        <% @account.tags.each do |tag| %>
+            <div id="tag-<%= tag.id %>" class="tag" style="background-color:<%= tag.color %>">
+              <%= link_to tag.name, [@account, tag] %>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+</div>
+
+<div id="tools" class="horizontal-bar">
+  <% if false and @account %>
+      <% form_for BulkAction.new(:name => 'apply_label', :url => request.url), :url => account_actions_path(@account), :html => {:id => 'labelize'} do |form| %>
+          <%= form.hidden_field :name %>
+          <%= form.hidden_field :movement_ids %>
+          <%= form.hidden_field :url %>
+          <div>Aplicar la etiqueta:</div>
+          <%= form.select :tag_id, @account.tags.collect { |t| [t.name, t.id] } %>
+          <div>A los&nbsp;</div>
+          <div class="selected_counter">0</div>
+          <div>&nbsp;elementos seleccionados.</div>
+          <%= form.submit 'Vamos!' %>
+      <% end %>
+  <% end %>
+</div>
+
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js">
 </script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 <script type="text/javascript">
     !window.jQuery && document.write('<script src="/javascripts/jquery-1.4.4.min.js"><\/script>')
 </script>

@@ -13,7 +13,9 @@ Cuentas::Application.routes.draw do
     resources :movements do
       resources :comments
     end
-    resources :tags
+    resources :tags do
+      put 'calculate', :on => :collection
+    end
     resources :taggings
     resources :months
     resources :years do

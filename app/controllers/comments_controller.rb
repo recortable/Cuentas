@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :require_account
+  respond_to :js
 
   def create
     @movement = @account.movements.find params[:movement_id]

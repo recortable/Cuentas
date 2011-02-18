@@ -1,6 +1,5 @@
 class Account < ActiveRecord::Base
   validates_presence_of :number, :office_code, :entity_code, :control_code, :name, :owner
-  #before_save :calculate
   has_many :holders
   has_many :movements
   has_many :months#, :order => 'YEAR desc, MONTH desc, ID desc'
@@ -28,9 +27,5 @@ class Account < ActiveRecord::Base
     name ? "#{id}-#{name.parameterize}" : id.to_s
   end
 
-  def calculate
-    first    = self.movements.count > 0 ? self.movements.first.d.year : Time.now.year
-    last     = Time.now.year
-    first.upto(last) {|y| Year.find_or_create_by_account_id_and_number(self.id, y) }
-  end
+
 end

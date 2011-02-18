@@ -1,0 +1,9 @@
+<%= simple_form_for [@account, @tag] do |form| %>
+    <%= form.input :name %>
+    <%= form.input :color %>
+    <%= form.input :comments %>
+    <div class="controls">
+      <%= form.submit 'Guardar' %>
+      <%= link_to 'Cancelar', (@tag.new_record? ? [@account, :tags] : [@account, @tag]) %>
+    </div>
+<% end %>

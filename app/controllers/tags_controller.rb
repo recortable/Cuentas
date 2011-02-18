@@ -8,7 +8,28 @@ class TagsController < ApplicationController
   end
 
   def show
-    @tag = @account.tags.find params[:id]
+    load_tag
     respond_with @tag
   end
+
+  def edit
+    load_tag
+    respond_with @tag
+  end
+
+  def update
+    load_tag
+    @tag.update_attributes(params[:tag])
+    redirect_to [@account, @tag]
+  end
+
+  def load_tag
+    @tag = @account.tags.find params[:id]
+  end
+
+  def calculate
+    @account.tags.all.each {|t| t.save }
+    redirect_to [@account, :tags]
+  end
+
 end

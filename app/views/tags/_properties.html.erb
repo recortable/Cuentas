@@ -1,0 +1,13 @@
+
+<% if tag.report %>
+<dl class="properties">
+  <dt>Movimientos:</dt>
+    <dd><%= tag.report[:movements_count] %></dd>
+  <dt>Balance:</dt>
+  <dd class="<%= number_class tag.report[:balance] %>"><%= euros tag.report[:balance] %></dd>
+  <dt>Positivo:</dt>
+  <dd class="number positive"><%= euros tag.report[:positive] %></dd>
+  <dt>Negativo:</dt>
+  <dd class="number negative"><%= euros tag.report[:negative] %></dd>
+</dl>
+<% end %>

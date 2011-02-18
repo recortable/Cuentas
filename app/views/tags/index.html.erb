@@ -1,7 +1,10 @@
 <%= title 'Etiquetas' %>
-
+<%= form_tag [:calculate, @account, :tags], :method => :put do %><%= submit_tag 'Actualizar etiquetas' %>
+<% end %>
 <% @tags.each do |tag| %>
     <%= div_for tag do %>
-        <h2><%= link_to tag.name, [@account, tag] %></h2>
+        <div class="tag_color" style="background-color: <%= tag.color %>"></div>
+        <h2><%= link_to tag.name, [@account, tag] %> <%= link_to 'ஜ', [:edit, @account, tag] %></h2>
+        <%= render :partial => 'properties', :locals => {:tag => tag} %>
     <% end %>
 <% end %>

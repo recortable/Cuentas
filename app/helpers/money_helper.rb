@@ -4,7 +4,9 @@
 module MoneyHelper
 
   def number_class(number)
-    number > 0 ? 'positive' : 'negative'
+    if number.present?
+      number > 0 ? 'positive' : 'negative'
+    end
   end
 
 
@@ -18,7 +20,7 @@ module MoneyHelper
     # :currency_before => false puts the currency symbol after the number
     # default format: $12,345,678.90
     options = {:currency_symbol => " €", :delimiter => ".", :decimal_symbol => ",", :currency_before => false, :absolute => false}.merge(options)
-    number  = number.abs if options[:absolute]
+    number = number.abs if options[:absolute]
     number = number.to_f
 
     # split integer and fractional parts

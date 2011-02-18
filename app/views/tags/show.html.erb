@@ -1,4 +1,9 @@
 <%= title @tag.name %>
+<div class="actions">
+  <%= link_to 'Editar', [:edit, @account, @tag] %>
+</div>
+
+<%= render :partial => 'properties', :locals => {:tag => @tag} %>
 
 <%= render_movements @tag.movements %>
 

@@ -11,10 +11,9 @@
 
     <p class="property string concept"><%= movement.concept %></p>
   </div>
-
-  <div id="tags-<%= movement.id %>" class="tags taggings"><%= render movement.taggings %></div>
+  <%= link_to 'ண', [@account, movement, :comments], :class => 'add_comment' %>
   <div class="comments" id="comments-<%= movement.id %>">
-    <%= link_to 'ண', [@account, movement, :comments], :class => 'add_comment' %>
     <%= simple_format(movement.comments) if movement.comments? %>
   </div>
+  <div id="tags-<%= movement.id %>" class="tags taggings"><%= render movement.taggings %></div>
 </li>
