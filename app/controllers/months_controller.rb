@@ -12,6 +12,7 @@ class MonthsController < ApplicationController
   def update
     load_month
     @month.update_attributes(params[:month])
+    @month.save
     redirect_to [@account, @month]
   end
 
