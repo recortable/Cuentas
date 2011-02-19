@@ -13,8 +13,12 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = @account.tags.create(params[:tag])
-    redirect_to :back
+    @tag = @account.tags.build(params[:tag])
+    if @tag.save
+      flash[:notive] = "Etiqueta creada"
+      Activity.action(:create, @tag, current_user)
+    end
+    redirect_to [@account, :tags]
   end
 
   def show
@@ -29,7 +33,7 @@ class TagsController < ApplicationController
 
   def update
     load_tag
-    @tag.update_attributes(params[:tag])
+    Activity.action(:update, @tag, current_user) if @tag.update_attributes(params[:tag])
     redirect_to [@account, @tag]
   end
 

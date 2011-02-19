@@ -9,7 +9,32 @@ es:
       no_header: "Faltan la cabecera en los datos de importación (probablemente un error al copiar y pegar)"
   activity:
     Session:
-      create: "%{user} ha creado una nueva sesión"
+      create: "%{user} ha iniciado su sessión"
+    Account:
+      create: "%{user} ha creado la cuenta '%{name}'"
+    Tag:
+      create: "%{user} ha creado la etiqueta '%{name}'"
+      update: "%{user} ha modificado la etiqueta '%{name}'"
+    User:
+      create: "%{user} ha creado el usuario '%{name}'"
+      update: "%{user} ha modificado el usuario '%{name}'"
+
+  activerecord:
+    attributes:
+      name: "Nombre"
+      tag:
+        name: "Nombre"
+        color: "Color"
+        comments: "Descripción"
+      account:
+        address: "Dirección"
+        entity_code: "Código de entidad"
+        office_code: "Código de oficina"
+        control_code: "Código de control"
+        number: "Número de cuenta"
+        owner: "Titular"
+        owner_address: "Dirección del titular"
+
       
   months:
     month-1: Ene

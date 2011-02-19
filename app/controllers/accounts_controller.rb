@@ -7,6 +7,21 @@ class AccountsController < ApplicationController
     respond_with @account
   end
 
+  def create
+    @account = Account.new(params[:account])
+    @account.users << current_user
+    if @account.save
+      flash[:notice] = "Nueva cuenta creada"
+      Activity.create(:user_id => current_user.id, :action => 'create', :resource=> 'Session')
+    end
+    respond_with @account
+  end
+
+  def new
+    @account = Account.new
+    respond_with @account
+  end
+
   def show
     redirect_to account_months_path(params[:id])
     #@account = current_user.accounts.find params[:id]
@@ -15,7 +30,7 @@ class AccountsController < ApplicationController
 
   def edit
     @account = current_user.accounts.find params[:id]
-    respond_with @account    
+    respond_with @account
   end
 
   def update

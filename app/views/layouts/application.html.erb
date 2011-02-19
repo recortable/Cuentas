@@ -3,7 +3,7 @@
 <head>
   <title><%= yield :title %><%= " - #{@account.name}" if @account %> - Cuentas</title>
   <%= csrf_meta_tag %>
-  <% if @account %>
+  <% if @account  && @account.id %>
       <meta name="taggins_path" content="<%= account_taggings_path(@account) %>"/>
   <% end %>
   <link rel="shortcut icon" href="/favicon.ico">
@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="navigation" class="horizontal-bar">
-  <% if @account %>
+  <% if @account && @account.id %>
       <%= form_tag account_movements_path(@account), :method => :get do %>
           <div>Buscar:</div>
           <%= text_field_tag :q %>
@@ -71,7 +71,7 @@
   <div id="info"></div>
 </div>
 <div id="account" class="side-bar">
-  <% if @account %>
+  <% if @account  && @account.id %>
       <h1><%= @account.name %></h1>
 
       <div><%= @account.complete_number %></div>
@@ -89,12 +89,14 @@
       <h2><%= link_to 'Etiquetas', account_tags_path(@account) %></h2>
 
       <div class="tags">
+        <div class="actions">
+          <%= link_to 'Nueva...', [:new, @account, :tag] %>
+        </div>
         <% @account.tags.each do |tag| %>
             <div id="tag-<%= tag.id %>" class="tag" style="background-color:<%= tag.color %>">
               <%= link_to tag.name, [@account, tag] %>
             </div>
-        <% end %>
-        <%= link_to 'Nueva...', [:new, @account, :tag] %>
+      <% end %>
       </div>
   <% end %>
 </div>

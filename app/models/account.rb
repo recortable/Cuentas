@@ -30,24 +30,34 @@ class Account < ActiveRecord::Base
   end
 
   def report!
+    last_year = Date.today.year
+    last_movement = self.movements.last
+    first_year = last_movement ? last_movement.d.year : last_year
+    first_year.upto(last_year) do |year|
+      self.years.find_or_create_by_number(year)
+    end
+
+
     report = {:count => 0, :ammount => 0, :positive => 0, :negative => 0, :before => 0, :after => 0, :tags => {}}
 
     years = self.years
-    report[:before] = years.last.r :before
-    report[:after] = years.first.r :after
-    years.each do |year|
-      report[:count] = year.r :count
-      report[:ammount] += year.r :ammount
-      report[:positive] += year.r :positive
-      report[:negative] += year.r :negative
-      if year.report[:tags]
-        year.report[:tags].each do |key, value|
-          tag_report = report[:tags][key] ||= {:count => 0, :ammount => 0, :positive => 0, :negative => 0}
-          tag_report[:color] = value[:color]
-          tag_report[:count] += value[:count]
-          tag_report[:ammount] += value[:ammount]
-          tag_report[:positive] += value[:positive]
-          tag_report[:negative] += value[:negative]
+    if years.size > 0
+      report[:before] = years.last.r :before
+      report[:after] = years.first.r :after
+      years.each do |year|
+        report[:count] = year.r :count
+        report[:ammount] += year.r :ammount
+        report[:positive] += year.r :positive
+        report[:negative] += year.r :negative
+        if year.report[:tags]
+          year.report[:tags].each do |key, value|
+            tag_report = report[:tags][key] ||= {:count => 0, :ammount => 0, :positive => 0, :negative => 0}
+            tag_report[:color] = value[:color]
+            tag_report[:count] += value[:count]
+            tag_report[:ammount] += value[:ammount]
+            tag_report[:positive] += value[:positive]
+            tag_report[:negative] += value[:negative]
+          end
         end
       end
     end

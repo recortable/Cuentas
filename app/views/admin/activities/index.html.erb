@@ -1,7 +1,14 @@
 <%= title 'Actividad' %>
 
-<% @activities.each do |activity| %>
-    <div class="activity">
-      <%= t("activity.#{activity.resource_type}.#{activity.action}", :user => activity.user.name) %>
-    </div>
-<% end %>
+<table>
+
+  <% @activities.each do |activity| %>
+      <tr class="activity">
+        <td>
+          <%= t("activity.#{activity.resource_type}.#{activity.action}", :user => activity.user.name,
+                :name => activity.resource_name, :resource_id => activity.resource_id) %>
+        </td>
+        <td>(hace <%= time_ago_in_words activity.created_at %>)</td>
+      </tr>
+  <% end %>
+</table>

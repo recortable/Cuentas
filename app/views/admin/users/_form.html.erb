@@ -1,0 +1,7 @@
+<% simple_form_for [:admin, @user] do |form| %>
+    <%= form.input :name %>
+    <%= form.input :email %>
+    <div class="controls">
+      <%= form.submit 'Guardar' %>
+    </div>
+<% end %>

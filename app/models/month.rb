@@ -58,7 +58,8 @@ class Month < ActiveRecord::Base
         type = movement.ammount >= 0 ? :positive : :negative
         report[type] += movement.ammount
         movement.tags.each do |tag|
-          tag_report = report[:tags][tag.name] ||= {:count => 0, :ammount => 0, :positive => 0, :negative => 0}
+
+
           tag_report[:color] = tag.color
           tag_report[:count] += 1
           tag_report[:ammount] += movement.ammount
@@ -66,10 +67,14 @@ class Month < ActiveRecord::Base
         end
       end
     elsif self.begin_date <= Date.today
-      last_movement = Movement.where(:account_id => self.account_id, :date.lte => Date.today.to_db).order('date DESC, id DESC ').first
-      if last_movement
-        report[:before] = last_movement.balance
-        report[:after] = last_movement.balance
+      first_movement = account.movements.last
+      if first_movement && first_movement.d > self.end_date
+      else
+        last_movement = account.movements.first
+        if last_movement
+          report[:before] = last_movement.balance
+          report[:after] = last_movement.balance
+        end
       end
     else
     end

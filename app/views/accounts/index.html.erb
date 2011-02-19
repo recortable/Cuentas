@@ -1,3 +1,7 @@
 <%= title 'Mis Cuentas' %>
 
+<div class="actions">
+  <%= link_to 'Crear cuenta', new_account_path %>
+</div>
+
 <%= render current_user.accounts %>

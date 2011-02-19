@@ -1,11 +1,23 @@
-<%= title 'Users' %>
+<%= title 'Administración de usuarios' %>
+
+<div class="actions">
+  <%= link_to 'Añadir usuario', new_admin_user_path %>
+</div>
 
 <% @users.each do |user| %>
-  <%= div_for user do %>
-    <div class="property string name"><%= user.name %></div>
-    <div class="property email"><%= user.email %></div>
-    <% user.authorizations.each do |auth| %>
-      <div class="property string authorization"><%= auth.provider %> <%= l auth.created_at %></div>
+    <%= div_for user do %>
+        <h2 class="property string name"><%= user.name %>
+          <%= link_to 'ஜ', edit_admin_user_path(user) %>
+        </h2>
+        <dl class="properties">
+          <dt>Email:</dt>
+          <dd class="email"><%= user.email %></dd>
+          <dt>Número de sesiones:</dt>
+          <dd class="email"><%= user.login_count %></dd>
+          <% if user.last_login_at %>
+              <dt>Última sesión:</dt>
+              <dd class="email">hace <%= time_ago_in_words user.last_login_at %></dd>
+          <% end %>
+        </dl>
     <% end %>
-  <% end %>
 <% end %>
