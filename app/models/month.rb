@@ -58,8 +58,7 @@ class Month < ActiveRecord::Base
         type = movement.ammount >= 0 ? :positive : :negative
         report[type] += movement.ammount
         movement.tags.each do |tag|
-
-
+          tag_report = report[:tags][key] ||= {:count => 0, :ammount => 0, :positive => 0, :negative => 0}
           tag_report[:color] = tag.color
           tag_report[:count] += 1
           tag_report[:ammount] += movement.ammount
