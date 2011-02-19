@@ -20,7 +20,7 @@ class Account < ActiveRecord::Base
   end
 
   def movements_between(begin_date, end_date)
-    Movement.where(:account_id => self.id, :date.gte => begin_date.to_db, :date.lte => end_date.to_db).order('date')
+    Movement.where(:account_id => self.id, :date.gte => begin_date.to_db, :date.lte => end_date.to_db).order('date ASC, id DESC')
   end
 
   def to_param

@@ -1,8 +1,7 @@
 <% title @year.number.to_s %>
-<h1><%= link_to @year.number, [@account, :months] %></h1>
+<h1><%= link_to @year.number, [@account, :years] %></h1>
 
-<%= render :partial => 'properties', :locals => {:year => @year, :movements => true} %>
-
+<%= render_report @year.report %>
 <div class="actions">
   <% form_for [@account, @year] do |form| %><%= form.submit 'Actualizar año' %>
   <% end %>
@@ -10,6 +9,7 @@
     <% submit_tag 'Actualizar meses' %>
   <% end %>
 </div>
+<%= render_tag_report @year.report %>
 <div class="months">
   <%= render @year.months if @year.months %>
 </div>

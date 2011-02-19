@@ -22,7 +22,7 @@ class YearsController < ApplicationController
   def calculate_months
     load_year
     @year.months.each do |month|
-      month.calculate
+      month.report!
       month.save
     end
     redirect_to [@account, @year]

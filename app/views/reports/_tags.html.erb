@@ -1,0 +1,12 @@
+<div class="tags_report">
+  <% tags.each do |name, tag| %>
+      <div class="tag_report">
+        <div class="tag" style="color:<%= tag[:color] %>;">
+          <%= name %>(<%= tag[:count] %>)
+          <dd class="number <%= number_class tag[:ammount] %>"><%= euros tag[:ammount] %></dd>
+          <!--dd class="number positive"><%= euros tag[:positive] %></dd>
+          <dd class="number negative"><%= euros tag[:negative] %></dd -->
+        </div>
+      </div>
+  <% end %>
+</div>

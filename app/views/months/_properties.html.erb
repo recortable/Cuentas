@@ -1,0 +1,20 @@
+<% if @month.report %>
+    <dl class="properties">
+      <dt>Balance:</dt>
+      <dd class="<%= number_class @month.r(:ammount) %>"><%= euros @month.r(:ammount) %></dd>
+      <dt>Número de movimientos:</dt>
+      <dd><%= @month.r(:count) %></dd>
+      <dt>Saldo al inicio:</dt>
+      <dd class="ammount"><%= euros @month.r :before %></dd>
+      <dt>Saldo al final:</dt>
+      <dd class="ammount actual"><%= euros @month.r :after %></dd>
+      <dt>Ingresos:</dt>
+      <dd class="positive"><%= euros @month.r(:positive) %></dd>
+      <dt>Gastos:</dt>
+      <dd class="negative"><%= euros @month.r(:negative), :absolute => true %></dd>
+      <div class="properties_hidden">
+        <dt>Número de tags:</dt>
+        <dd><%= @month.r(:tags).size %></dd>
+      </div>
+    </dl>
+<% end %>

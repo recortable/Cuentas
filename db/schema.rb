@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110217231901) do
+ActiveRecord::Schema.define(:version => 20110218095310) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20110217231901) do
     t.string   "iban"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "report"
+    t.text     "comments"
   end
 
   create_table "activities", :force => true do |t|
@@ -62,10 +64,11 @@ ActiveRecord::Schema.define(:version => 20110217231901) do
     t.integer  "before_balance",   :default => 0
     t.integer  "after_balance",    :default => 0
     t.string   "tag_summary"
-    t.string   "comments"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "movements_count",  :default => 0
+    t.text     "report"
   end
 
   add_index "months", ["month"], :name => "index_month_summaries_on_month"
@@ -119,10 +122,11 @@ ActiveRecord::Schema.define(:version => 20110217231901) do
     t.integer  "before_ammount",   :default => 0
     t.integer  "after_ammount",    :default => 0
     t.string   "tag_summary"
-    t.string   "comments"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "movements_count",  :default => 0
+    t.text     "report"
   end
 
 end

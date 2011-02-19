@@ -1,0 +1,14 @@
+<dl class="properties">
+  <dt>Balance:</dt>
+  <dd class="<%= number_class report[:ammount] %>"><%= euros report[:ammount] %></dd>
+  <dt>Número de movimientos:</dt>
+  <dd><%= report[:count] %></dd>
+  <dt>Saldo al inicio:</dt>
+  <dd class="ammount"><%= euros report[:before] %></dd>
+  <dt>Saldo al final:</dt>
+  <dd class="ammount actual"><%= euros report[:after] %></dd>
+  <dt>Ingresos:</dt>
+  <dd class="positive"><%= euros report[:positive] %></dd>
+  <dt>Gastos:</dt>
+  <dd class="negative"><%= euros report[:negative], :absolute => true %></dd>
+</dl>

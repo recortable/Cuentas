@@ -1,7 +1,15 @@
 module DisplayHelper
 
   def render_movements(movements)
-    render :partial => 'movements/movements', :locals => {:movements => movements}
+    render(:partial => 'movements/movements', :locals => {:movements => movements})
+  end
+
+  def render_report(report)
+    render(:partial => 'reports/report', :locals => {:report => report}) if report
+  end
+
+  def render_tag_report(report)
+    render(:partial => 'reports/tags', :locals => {:tags => report[:tags]}) if report and report[:tags]
   end
 
   def property(label, value)

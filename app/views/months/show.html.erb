@@ -1,18 +1,14 @@
 <% title "#{mes(@month.month)} #{@month.year}" %>
-<h1><%= mes(@month.month) %> <%= link_to @month.year, [@account, :months] %></h1>
+<h1><%= link_to mes(@month.month), account_year_path(@account, @month.year) %> <%= link_to @month.year, [@account, :years] %></h1>
 
-<dl class="properties">
-  <dt>Balance:</dt><dd class="<%= number_class @month.balance %>"><%= euros @month.balance %></dd>
-  <dt>Número de movimientos:</dt><dd><%= @month.movements_count %></dd>
-  <dt>Ingresos:</dt><dd class="positive"><%= euros @month.positive_ammount %></dd>
-  <dt>Gastos:</dt><dd class="negative"><%= euros @month.negative_ammount, :absolute => true %></dd>
-</dl>
-<% form_for [@account,@month] do |form| %><%= form.submit 'Actualizar' %><% end %>
+<%= render_report @month.report %>
+<% form_for [@account, @month] do |form| %><%= form.submit 'Actualizar' %>
+<% end %>
+<%= render_tag_report @month.report %>
 
 <h2>Desde el <%= @month.begin_date.mday %> de <%= mes @month.begin_date.month %> de <%= @month.begin_date.year %>
-  (<%= euros @month.before_balance %>)</h2>
-
-<%= render :partial => 'movements/movements', :object => @month.movements %>
-
+  (<%= euros @month.r(:before) %>)</h2>
+<%= render_movements @month.movements %>
 <h2>Hasta el <%= @month.end_date.mday %> de <%= mes @month.end_date.month %> de <%= @month.end_date.year %>
-  (<%= euros @month.after_balance %>)</h2>
+  (<%= euros @month.r(:after) %>)</h2>
+

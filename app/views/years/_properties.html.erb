@@ -1,17 +1,16 @@
-
-<dl class="properties">
-  <% if defined? movements %>
-    <dt>Número de movimientos:</dt>
-    <dd><%= year.movements_count %></dd>
-  <% end %>
-  <dt>Balance:</dt>
-  <dd class="<%= number_class year.balance %>"><%= euros year.balance %></dd>
-  <dt>Saldo al inicio:</dt>
-  <dd class="ammount"><%= euros year.balance_before %></dd>
-  <dt>Saldo al final:</dt>
-  <dd class="ammount"><%= euros year.balance_after %></dd>
-  <dt>Ingresos:</dt>
-  <dd class="positive"><%= euros year.positive_ammount %></dd>
-  <dt>Gastos:</dt>
-  <dd class="negative"><%= euros year.negative_ammount, :absolute => true %></dd>
-</dl>
+<% if year.report? %>
+    <dl class="properties">
+      <dt>Balance:</dt>
+      <dd class="<%= number_class year.r :ammount %>"><%= euros year.r :ammount %></dd>
+      <dt>Número de movimientos:</dt>
+      <dd><%= year.r :count %></dd>
+      <dt>Saldo al inicio:</dt>
+      <dd class="ammount"><%= euros year.r :before %></dd>
+      <dt>Saldo al final:</dt>
+      <dd class="ammount actual"><%= euros year.r :after %></dd>
+      <dt>Ingresos:</dt>
+      <dd class="positive"><%= euros year.r :positive %></dd>
+      <dt>Gastos:</dt>
+      <dd class="negative"><%= euros year.r(:negative), :absolute => true %></dd>
+    </dl>
+<% end %>

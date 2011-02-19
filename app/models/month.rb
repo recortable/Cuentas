@@ -2,10 +2,11 @@
 class Month < ActiveRecord::Base
   default_scope :order => 'year ASC, month ASC'
   belongs_to :account
-  before_save :calculate
+  before_save :report!
+  serialize :report
 
   def movements
-    account.movements_between(begin_date, end_date)
+    account.movements_between(begin_date, end_date).order('date DESC')
   end
 
   def type
@@ -40,24 +41,39 @@ class Month < ActiveRecord::Base
     Month.find_or_create_by_account_id_and_year_and_month(account_id, year, month)
   end
 
-  def calculate
-    self.movements_count = self.movements.count
-    self.positive_ammount = 0
-    self.negative_ammount = 0
-    all                   = self.movements.order('date asc')
-    if self.movements_count > 0
-      last                = all.last
-      self.before_balance = all.first.balance_before
-      self.after_balance  = last.balance_after
+  def r(key)
+    report[key] if report
+  end
+
+  def report!
+    all = self.movements
+    report = {:positive => 0, :negative => 0, :count => 0, :ammount => 0,
+              :before => 0, :after => 0, :tags => {}}
+    report[:count] = all.size
+    if report[:count] > 0
+      last = all.last
+      report[:before] = all.first.balance_before
+      report[:after] = last.balance_after
       all.each do |movement|
-        if movement.ammount >= 0
-          self.positive_ammount = self.positive_ammount + movement.ammount
-        else
-          self.negative_ammount = self.negative_ammount + movement.ammount
+        type = movement.ammount >= 0 ? :positive : :negative
+        report[type] += movement.ammount
+        movement.tags.each do |tag|
+          tag_report = report[:tags][tag.name] ||= {:count => 0, :ammount => 0, :positive => 0, :negative => 0}
+          tag_report[:color] = tag.color
+          tag_report[:count] += 1
+          tag_report[:ammount] += movement.ammount
+          tag_report[type] += movement.ammount
         end
       end
+    elsif self.begin_date <= Date.today
+      last_movement = Movement.where(:account_id => self.account_id, :date.lte => Date.today.to_db).order('date DESC, id DESC ').first
+      if last_movement
+        report[:before] = last_movement.balance
+        report[:after] = last_movement.balance
+      end
     else
-
     end
+    report[:ammount] = report[:after] - report[:before]
+    self.report = report
   end
 end
