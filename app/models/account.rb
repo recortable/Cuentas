@@ -1,11 +1,13 @@
 class Account < ActiveRecord::Base
+  before_save :report!
   validates_presence_of :number, :office_code, :entity_code, :control_code, :name, :owner
   has_many :holders
   has_many :movements
-  has_many :months#, :order => 'YEAR desc, MONTH desc, ID desc'
+  has_many :months #, :order => 'YEAR desc, MONTH desc, ID desc'
   has_many :years, :order => 'NUMBER desc'
   has_many :tags
   has_many :users, :through => :holders
+  serialize :report
 
   def complete_number
     "#{entity_code} #{office_code} #{control_code} #{number}"
@@ -16,7 +18,7 @@ class Account < ActiveRecord::Base
   end
 
   def months_by_years
-    self.months.group_by{|m| m.year}
+    self.months.group_by { |m| m.year }
   end
 
   def movements_between(begin_date, end_date)
@@ -27,5 +29,28 @@ class Account < ActiveRecord::Base
     name ? "#{id}-#{name.parameterize}" : id.to_s
   end
 
+  def report!
+    report = {:count => 0, :ammount => 0, :positive => 0, :negative => 0, :before => 0, :after => 0, :tags => {}}
 
+    years = self.years
+    report[:before] = years.last.r :before
+    report[:after] = years.first.r :after
+    years.each do |year|
+      report[:count] = year.r :count
+      report[:ammount] += year.r :ammount
+      report[:positive] += year.r :positive
+      report[:negative] += year.r :negative
+      if year.report[:tags]
+        year.report[:tags].each do |key, value|
+          tag_report = report[:tags][key] ||= {:count => 0, :ammount => 0, :positive => 0, :negative => 0}
+          tag_report[:color] = value[:color]
+          tag_report[:count] += value[:count]
+          tag_report[:ammount] += value[:ammount]
+          tag_report[:positive] += value[:positive]
+          tag_report[:negative] += value[:negative]
+        end
+      end
+    end
+    self.report = report
+  end
 end

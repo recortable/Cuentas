@@ -1,8 +1,11 @@
 <%= title 'Resúmen por años' %>
 
+
+<%= render_report @account.report %>
 <%= form_tag account_path(@account), :method => :put do %>
-  <% submit_tag 'Actualizar años' %>
+  <% submit_tag 'Actualizar datos' %>
 <% end %>
+<%= render_tag_report @account.report %>
 
 <% @years.each do |year| %>
   <%= div_for year do %>
