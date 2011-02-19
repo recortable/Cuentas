@@ -30,13 +30,14 @@ class Account < ActiveRecord::Base
   end
 
   def report!
-    last_year = Date.today.year
-    last_movement = self.movements.last
-    first_year = last_movement ? last_movement.d.year : last_year
-    first_year.upto(last_year) do |year|
-      self.years.find_or_create_by_number(year)
+    unless self.new_record?
+      last_year = Date.today.year
+      last_movement = self.movements.last
+      first_year = last_movement ? last_movement.d.year : last_year
+      first_year.upto(last_year) do |year|
+        self.years.find_or_create_by_number(year)
+      end
     end
-
 
     report = {:count => 0, :ammount => 0, :positive => 0, :negative => 0, :before => 0, :after => 0, :tags => {}}
 

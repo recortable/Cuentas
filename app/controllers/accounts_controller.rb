@@ -9,11 +9,10 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(params[:account])
+    @account.users << current_user
     if @account.save
-      @account.users << current_user
-      @account.save
       flash[:notice] = "Nueva cuenta creada"
-      Activity.create(:user_id => current_user.id, :action => 'create', :resource=> 'Session')
+      Activity.action(:create, @account, current_user)
     end
     respond_with @account
   end
