@@ -1,3 +1,6 @@
+# encoding: UTF-8
+
+
 Cuentas::Application.routes.draw do
   get "activities/index"
 
@@ -8,24 +11,23 @@ Cuentas::Application.routes.draw do
   match "/cerrar" => "sessions#destroy", :as => :logout
   match "/identificarse" => "sessions#new", :as => :login
   match "/admin" => "admin/activities#index"
-  
-  resources :accounts do
-    resources :movements do
-      resources :comments
+
+  resources :accounts, :path => 'cuentas' do
+    resources :movements, :path => 'movimientos' do
+      resources :comments, :path => 'comentarios'
     end
-    resources :tags do
+    resources :tags, :path => 'etiquetas' do
       put 'calculate', :on => :collection
     end
     resources :taggings
-    resources :months
-    resources :years do
+    resources :months, :path => 'meses'
+    resources :years, :path => 'anyos' do
       put 'calculate_months', :on => :member
     end
     resources :actions
-    resource :import do
+    resource :import, :path => 'importar' do
       post 'preview'
     end
-    resources :tags
   end
 
   namespace :admin do

@@ -40,4 +40,8 @@ class Movement < ActiveRecord::Base
     !self.comments.blank?
   end
 
+  def name
+    "#{date} | #{ammount} | #{concept}"
+  end
+
 end

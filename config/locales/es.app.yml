@@ -21,8 +21,8 @@ es:
 
   views:
     pagination:
-      previous: 'Anteriores'
-      next: 'Siguientes'
+      previous: '<< Anterior'
+      next: 'Siguiente >>'
 
   activerecord:
     attributes:

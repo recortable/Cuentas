@@ -1,6 +1,7 @@
 class Year < ActiveRecord::Base
   before_save :report!
   serialize :report
+  belongs_to :account
 
   def balance
     after_ammount - before_ammount
@@ -44,18 +45,20 @@ class Year < ActiveRecord::Base
       report[:after] = last.balance
     end
     months.each do |month|
-      report[:positive] += month.r :positive
-      report[:negative] += month.r :negative
-      report[:count] += month.r :count
-      if month.report[:tags]
-        month.report[:tags].each do |key, value|
-        tag_report = report[:tags][key] ||= {:count => 0, :ammount => 0, :positive => 0, :negative => 0}
-        tag_report[:color] = value[:color]
-        tag_report[:count] += value[:count]
-        tag_report[:ammount] += value[:ammount]
-        tag_report[:positive] += value[:positive]
-        tag_report[:negative] += value[:negative]
-      end
+      if month.report.present?
+        report[:positive] += month.r :positive
+        report[:negative] += month.r :negative
+        report[:count] += month.r :count
+        if month.report[:tags]
+          month.report[:tags].each do |key, value|
+            tag_report = report[:tags][key] ||= {:count => 0, :ammount => 0, :positive => 0, :negative => 0}
+            tag_report[:color] = value[:color]
+            tag_report[:count] += value[:count]
+            tag_report[:ammount] += value[:ammount]
+            tag_report[:positive] += value[:positive]
+            tag_report[:negative] += value[:negative]
+          end
+        end
       end
     end
     report[:ammount] = report[:after] - report[:before]

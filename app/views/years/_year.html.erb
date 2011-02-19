@@ -1,0 +1,7 @@
+  <%= div_for year do %>
+    <h2><%= link_to year.number, [year.account, year] %></h2>
+    <%= render :partial => 'years/properties', :locals => {:year => year} %>
+    <div class="months">
+      <%= render year.months %>
+    </div>
+  <% end %>

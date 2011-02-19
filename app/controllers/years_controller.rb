@@ -4,7 +4,6 @@ class YearsController < ApplicationController
 
   def index
     @years           = @account.years
-    @months_by_years = @account.months_by_years
     respond_with @years
   end
 

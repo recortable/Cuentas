@@ -1,3 +1,8 @@
 <%= title 'Resúmen' %>
 
-<%= render current_user.accounts %>
+<% current_user.accounts.each do |account| %>
+    <h2><%= link_to account.name, account %></h2>
+    <%= render_report account.report %>
+    <%= render account.year(@year) %>
+<% end %>
+

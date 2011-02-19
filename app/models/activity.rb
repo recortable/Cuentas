@@ -6,7 +6,8 @@ class Activity < ActiveRecord::Base
   default_scope :order => 'id DESC'
 
   def resource_name
-    self.resource.name if self.resource_id
+    self.resource.class.name if self.resource_id
+
   end
 
   def path

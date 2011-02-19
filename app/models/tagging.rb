@@ -11,6 +11,11 @@ class Tagging < ActiveRecord::Base
   validates :movement_id, :presence => true
   validates :user_id, :presence => true
 
+  def name
+    "Etiquetado"
+  end
+
+
   private
   def increment_tag
     self.tag.update_attribute(:size, self.tag.size + 1)
@@ -19,4 +24,7 @@ class Tagging < ActiveRecord::Base
   def decrement_tag
     self.tag.update_attribute(:size, self.tag.size - 1)
   end
+
+
+
 end

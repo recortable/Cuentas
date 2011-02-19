@@ -14,6 +14,7 @@ class ImportsController < ApplicationController
           movement.save!
           @movements << movement
         end
+        Activity.action :import, @account, current_user
       end
       #flash[:notice] = t('user_account_imports.create.success')
     rescue ActiveRecord::RecordInvalid => e

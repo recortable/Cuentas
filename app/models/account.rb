@@ -13,6 +13,10 @@ class Account < ActiveRecord::Base
     "#{entity_code} #{office_code} #{control_code} #{number}"
   end
 
+  def year(year)
+    self.years.where(:number => year).first
+  end
+
   def account_number
     "#{entity_code}#{office_code}#{number}"
   end
@@ -46,7 +50,7 @@ class Account < ActiveRecord::Base
       report[:before] = years.last.r :before
       report[:after] = years.first.r :after
       years.each do |year|
-        report[:count] = year.r :count
+        report[:count] += year.r :count
         report[:ammount] += year.r :ammount
         report[:positive] += year.r :positive
         report[:negative] += year.r :negative
