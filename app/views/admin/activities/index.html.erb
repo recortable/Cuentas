@@ -6,6 +6,7 @@
       <tr class="activity">
         <td>
           <%= t("activity.#{activity.resource_type}.#{activity.action}", :user => activity.user.name,
+                  :resource => activity.safe_resource,
                 :name => activity.resource_name, :resource_id => activity.resource_id) %>
         </td>
         <td>(hace <%= time_ago_in_words activity.created_at %>)</td>

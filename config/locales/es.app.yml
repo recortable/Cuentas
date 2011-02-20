@@ -15,6 +15,9 @@ es:
     Tag:
       create: "%{user} ha creado la etiqueta '%{name}'"
       update: "%{user} ha modificado la etiqueta '%{name}'"
+    Tagging:
+      create: "%{user} ha añadido la etiqueta '%{name}'"
+      destroy: "%{user} ha quitado la etiqueta '%{name}'"
     User:
       create: "%{user} ha creado el usuario '%{name}'"
       update: "%{user} ha modificado el usuario '%{name}'"

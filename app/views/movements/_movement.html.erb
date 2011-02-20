@@ -1,6 +1,6 @@
 <li class="movement" id="movement-<%= movement.id %>">
   <div class="properties">
-    <p class="property date"><%= movement.d.mday %>/<%= movement.d.month %>
+    <p class="property date"><%= link_to "#{movement.d.mday}/#{movement.d.month}", account_month_path(@account, "#{movement.d.year}-#{movement.d.month}") %>
       /<%= link_to movement.d.year, account_year_path(@account, movement.d.year) %></p>
 
     <p class="property number ammount"><%= euros_of movement.ammount, :class => "value #{(movement.ammount > 0 ? 'positive' : 'negative')}" %></p>
@@ -13,7 +13,11 @@
   </div>
   <%= link_to 'ண', [@account, movement, :comments], :class => 'add_comment' %>
   <div class="comments" id="comments-<%= movement.id %>">
-    <%= simple_format(movement.comments) if movement.comments? %>
+    <% if movement.comments.present? %>
+        <% movement.comments.each_line do |comment| %>
+            <div class="comment">d<%= comment %></div>
+        <% end %>
+    <% end %>
   </div>
   <div id="tags-<%= movement.id %>" class="tags taggings"><%= render movement.taggings %></div>
 </li>

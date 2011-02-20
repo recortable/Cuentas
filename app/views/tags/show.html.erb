@@ -1,9 +1,12 @@
-<%= title @tag.name %>
+<% title @tag.name %>
+<h1><%= @tag.name %> <%= link_to 'ஐ', [:edit, @account, @tag] %></h1>
+<%= render :partial => 'properties', :locals => {:tag => @tag} %>
 <div class="actions">
-  <%= link_to 'Editar', [:edit, @account, @tag] %>
+  <%= link_to 'Actualizar datos', [@account, @tag], :method => :put %>
 </div>
 
-<%= render :partial => 'properties', :locals => {:tag => @tag} %>
-
-<%= render_movements @tag.movements %>
-
+<% if @tag.movements.count %>
+    <h2>Última (<%= @tag.movements.first.d.fecha %>)</h2>
+    <%= render_movements @tag.movements %>
+    <h2>Primera (<%= @tag.movements.last.d.fecha %>)</h2>
+<% end %>

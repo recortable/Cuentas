@@ -5,7 +5,7 @@ class Tag < ActiveRecord::Base
   default_scope :order => 'NAME'
   belongs_to :account
   has_many :taggings, :dependent => :delete_all
-  has_many :movements, :through => :taggings, :class_name => 'Movement'
+  has_many :movements, :through => :taggings, :class_name => 'Movement', :order => 'date DESC'
   before_save :report!
   serialize :report
 

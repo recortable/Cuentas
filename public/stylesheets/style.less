@@ -12,8 +12,9 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 @white: #f9f9f9;
 @whitesemi: #e1e1df;
 @bg: #818176;
-@darkbg: #6e6c5e;
-@darkerbg: #403f37;
+@bglite: #94948B;
+@bgdark: #6e6c5e;
+@bgdarker: #403f37;
 @medbg: #78776a;
 @lightbg: #8e8e80;
 @yellow: #c0c03a;
@@ -31,10 +32,10 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 
 /** HELPERS **/
 .container {width: 100%; overflow: hidden;}
-.shadow {text-shadow: 0 1px 0 @darkbg;}
+.shadow {text-shadow: 0 1px 0 @bgdark;}
 .positive {color: @green;}
 .negative {color: @red;}
-.ammount {color:@darkerbg;}
+.ammount {color:@bgdarker;}
 .actual {color: @black;}
 .errors {color:@red;}
 
@@ -52,7 +53,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
   text-decoration: none;
   font-size: 11px;
 }
-.tile {background-color:@darkbg; border-bottom:1px solid @lightbg; border-right:1px solid @lightbg;}
+.tile {background-color:@bgdark; border-bottom:1px solid @lightbg; border-right:1px solid @lightbg;}
 
 .button-clean-gray {
   background: #eee;
@@ -100,21 +101,21 @@ h1 {font-family: @font-title; font-size: 300%; margin-top: 1em; .shadow;}
 h2 {font-family: @font-title; font-size: 200%; margin-top: 1em; .shadow;}
 h3 {font-size: 150%; margin-top: 1em; .shadow;}
 a {text-decoration: none; color: @white;}
-a:hover {color: @darkerbg; text-shadow: 0px 1px 5px @whitesemi;}
+a:hover {color: @bgdarker; text-shadow: 0px 1px 5px @whitesemi;}
 p {.shadow; margin: 0.5em 0;}
 .spinner {display:block;background:url("/images/ajax-loader.gif") no-repeat;width:16px; height:16px;overflow:hidden;text-indent:-10em;}
 
 /** LAYOUT **/
 .side-bar {position:fixed;top:0em;bottom:0em;width:200px;padding:1em 0.5em 0 0.5em;
-background-color: @darkbg;border-right:1px solid @lightbg; border-left:1px solid @lightbg;}
+background-color: @bgdark;border-right:1px solid @lightbg; border-left:1px solid @lightbg;}
 #user_bar {left:0;}
 #center {position:absolute;left:218px; right: 200px; top: 2em; bottom: 2em;background-color: @bg; }
 #info {padding:2em 0;}
 #account {right:0;}
 
-.horizontal-bar {position:fixed;left:217px;right:217px;height:2em; z-index:5000;background-color:@darkbg; }
-#navigation {top: 0; border-bottom:1px solid @lightbg; box-shadow: 0px 1px 5px @darkerbg; }
-#tools {bottom: 0; border-top:1px solid @lightbg; box-shadow: 0px 1px 5px @darkerbg;}
+.horizontal-bar {position:fixed;left:217px;right:217px;height:2em; z-index:5000;background-color:@bgdark; }
+#navigation {top: 0; border-bottom:1px solid @lightbg; box-shadow: 0px 1px 5px @bgdarker; }
+#tools {bottom: 0; border-top:1px solid @lightbg; box-shadow: 0px 1px 5px @bgdarker;}
 
 
 .side-bar h2 {font-size: 200%; margin-top: 1em; border-bottom: 1px solid @lightbg;}
@@ -139,10 +140,10 @@ background-color: @darkbg;border-right:1px solid @lightbg; border-left:1px solid
 
 /** CENTER **/
 .flash {.tile; padding: 5px 8px; margin: 10px 0; border-radius: 3px;}
-.flash a {color:@darkerbg;}
-#flash_notice { background-color: @yellow; color: @darkerbg; }
+.flash a {color:@bgdarker;}
+#flash_notice { background-color: @yellow; color: @bgdarker; }
 #flash_error, #flash_alert { background-color: @red; color: @white; }
-.navigation {font-size:80%; color: @darkbg;}
+.navigation {font-size:80%; color: @bgdark;}
 #center {font-size:95%;}
 #center .column-1 {width: 80%; margin: 2em auto;}
 div.actions {.container;margin-bottom: 1em;}
@@ -154,16 +155,16 @@ div.info b {color: @black;}
 
 /** TABLES **/
 table {width:100%; .tile; margin-bottom: 1em; }
-table thead {color: @darkerbg;}
-table tr.movement {border-top: 1px solid @darkerbg;}
-table tr.comments {border-bottom: 1px solid @lightbg; background-color: @darkbg;}
+table thead {color: @bgdarker;}
+table tr.movement {border-top: 1px solid @bgdarker;}
+table tr.comments {border-bottom: 1px solid @lightbg; background-color: @bgdark;}
 table td {padding:3px;}
 table tbody {}
 
 /** PROPERTIES **/
 dl {margin: 5px;}
 dt {float: left; padding-right: 0.5em;}
-.year dl {color: @darkerbg; font-size: 80%;}
+.year dl {color: @bgdarker; font-size: 80%;}
 .year dd {float: left; padding-right:1em;}
 /** MODELS **/
 .months {.container;}
@@ -196,7 +197,7 @@ li.movement.selected {background-color:@yellow; }
 .tags {.container;}
 .tagging {.tag;opacity:0.6;}
 .tagging a {color: black; }
-.tag .tag_color {float: left; width: 2em; height:2em; margin-right:1em; border: 1px solid @darkbg; border-radius:3px;}
+.tag .tag_color {float: left; width: 2em; height:2em; margin-right:1em; border: 1px solid @bgdark; border-radius:3px;}
 
 div.account {width: 45%; float: left; margin-right:5%;}
 div.account .user {font-family: @font-title;}
@@ -205,7 +206,7 @@ div.account .user {font-family: @font-title;}
 form input[type=submit] {.button-clean-gray;}
 form div.input {.container; margin: 1px 0;}
 form div.input label {float: left; width: 12em; text-align:right;margin-right:0.5em;}
-form input[type=text] {background-color:@whitesemi; border:0;padding: 1px 2px; border: 1px solid @darkbg; border-width: 0 1px 1px 0;}
-textarea {width:100%; height: 10em; background-color: @whitesemi; border: 0; padding:0;}
+form input[type=text] {background-color:@bglite; border:0;padding: 1px 2px; border: 1px solid @bgdark; border-width: 0 1px 1px 0;}
+textarea {width:100%; height: 10em; background-color: @bglite; border: 0; padding:2px;}
 form .controls {clear:both;margin-left: 12.2em; .container; margin-top: 1em;}
-form #q {width:95%;margin: 2px; padding:2px; background-color: @lightbg; border: 1px solid @darkbg; color: @darkerbg;}
+form #q {width:95%;margin: 2px; padding:2px; background-color: @lightbg; border: 1px solid @bgdark; color: @bgdarker;}

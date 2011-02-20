@@ -6,8 +6,13 @@ class Activity < ActiveRecord::Base
   default_scope :order => 'id DESC'
 
   def resource_name
-    self.resource.class.name if self.resource_id
+    if self.resource_id.present? and self.resource_type.present?
+      self.resource ? self.resource.name : '<borrada>'
+    end
+  end
 
+  def safe_resource
+    self.resource if self.resource_id and self.resource_type
   end
 
   def path
