@@ -18,12 +18,8 @@
 <div id="navigation" class="horizontal-bar">
   <% if @account && @account.id %>
       <%= form_tag account_movements_path(@account), :method => :get do %>
-          <div>Buscar:</div>
+          <div>Buscar en <%= @account.name %>:</div>
           <%= text_field_tag :q %>
-          Por años:
-          <% @account.years.each do |year| %>
-              <%= link_to year.number, [@account, year] %>
-          <% end %>
       <% end %>
   <% end %>
 </div>
@@ -33,9 +29,6 @@
 
       <div id="session">
         <h2><%= current_user.name %></h2>
-
-        <h3><%= link_to 'Perfil', '#' %></h3>
-
         <h3><%= link_to 'Salir', logout_path %></h3>
 
         <h2><%= link_to 'Cuentas', accounts_path %></h2>
