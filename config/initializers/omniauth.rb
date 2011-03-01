@@ -1,7 +1,7 @@
 require 'openid/store/filesystem'
 
 if Rails.env.production?
-  OmniAuth.config.full_host = 'cuentas.recortable.net'
+#  OmniAuth.config.full_host = 'cuentas.recortable.net'
 end
 
 Rails.application.config.middleware.use OmniAuth::Builder do
