@@ -1,9 +1,8 @@
 require 'openid/store/filesystem'
 
-OmniAuth.configure do |config|
-  config.full_host = 'http://cuentas.recortable.net'
+if Rails.env.production?
+  OmniAuth.config.full_host = 'cuentas.recortable.net'
 end
-
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :open_id, OpenID::Store::Filesystem.new('/tmp')
