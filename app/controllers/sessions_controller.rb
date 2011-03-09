@@ -1,4 +1,9 @@
 class SessionsController < ApplicationController
+
+  def new
+    response.headers['Cache-Control'] = 'public, max-age=30000' if Rails.env.production?
+  end
+
   def create
     auth = request.env['omniauth.auth']
     @email = auth['user_info']['email']
