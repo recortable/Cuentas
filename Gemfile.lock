@@ -173,7 +173,6 @@ DEPENDENCIES
   meta_where
   mysql2
   newrelic_rpm
-  nokogiri
   omniauth
   rails (= 3.0.4)
   ruby-debug19

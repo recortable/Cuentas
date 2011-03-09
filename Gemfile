@@ -9,15 +9,14 @@ gem 'inherited_resources'
 gem 'newrelic_rpm'
 gem 'kaminari'
 gem "meta_where"
-
-gem 'capistrano'
-gem 'ruby-debug19'
-gem 'nokogiri'
-gem 'mysql2'
+#gem 'nokogiri'
 
 # gem 'bj'
 # gem 'aws-s3', :require => 'aws/s3'
 
 group :development, :test do
+  gem 'capistrano'
+  gem 'ruby-debug19'
+  gem 'mysql2'
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
