@@ -23,8 +23,10 @@ class MonthsController < ApplicationController
 
   protected
   def load_month
-    year   = params[:id][0..3]
-    month  = params[:id][5..-1]
-    @month = @account.months.find_by_year_and_month(year, month)
+    year = params[:id][0..3]
+    month = params[:id][5..-1]
+    @month = @account.months.
+        where(:year => year).where(:month => month).first
+    #@month = @account.months.find_by_year_and_month(year, month)
   end
 end

@@ -6,7 +6,8 @@ class Month < ActiveRecord::Base
   serialize :report
 
   def movements
-    account.movements_between(begin_date, end_date).order('date DESC')
+    account.movements_between(begin_date, end_date).
+        order('date DESC').all(:include => :taggings)
   end
 
   def type

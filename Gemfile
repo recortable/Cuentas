@@ -15,7 +15,7 @@ gem "simple_form"
 gem "cancan"
 gem 'inherited_resources'
 gem 'kaminari'
-gem 'squeel'
+#gem 'squeel'
 gem 'newrelic_rpm'
 #gem 'nokogiri'
 
