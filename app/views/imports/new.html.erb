@@ -10,7 +10,7 @@
     <% if @account.movements.count > 0 %>
         Último movimiento: <%= @account.movements.last.d.fecha %>
     <% end %>
-    <% form_tag(preview_account_import_path(@account), :class => 'import') do %>
+    <%= form_tag(preview_account_import_path(@account), :class => 'import') do %>
         <%= text_area_tag :import, params[:import] %>
         <br/><br/>
         <%= submit_tag 'Vista previa' %>
@@ -29,7 +29,7 @@
               </div>
           <% end %>
     <% else %>
-        <% form_tag(account_import_path(@account)) do %>
+        <%= form_tag(account_import_path(@account)) do %>
             <%= hidden_field_tag :import, params[:import] %>
             <table>
               <thead>
