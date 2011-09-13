@@ -3,16 +3,15 @@
 <head>
   <title><%= yield :title %><%= " - #{@account.name}" if @account %> - Cuentas</title>
   <%= csrf_meta_tag %>
-  <% if @account  && @account.id %>
+  <% if @account && @account.id %>
       <meta name="taggins_path" content="<%= account_taggings_path(@account) %>"/>
   <% end %>
   <link rel="shortcut icon" href="/favicon.ico">
   <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Nobile' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-<%= stylesheet_link_tag "application" %>
-<%= javascript_include_tag "application" %>
-
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
   <link rel="stylesheet/less" type="text/css" href="/stylesheets/style.less">
   <script src="/javascripts/less-1.0.41.min.js" type="text/javascript">
   </script>
@@ -32,6 +31,7 @@
 
       <div id="session">
         <h2><%= current_user.name %></h2>
+
         <h3><%= link_to 'Salir', logout_path %></h3>
 
         <h2><%= link_to 'Cuentas', accounts_path %></h2>
@@ -67,7 +67,7 @@
   <div id="info"></div>
 </div>
 <div id="account" class="side-bar">
-  <% if @account  && @account.id %>
+  <% if @account && @account.id %>
       <h1><%= @account.name %></h1>
 
       <div><%= @account.complete_number %></div>
@@ -92,7 +92,7 @@
             <div id="tag-<%= tag.id %>" class="tag" style="background-color:<%= tag.color %>">
               <%= link_to tag.name, [@account, tag] %>
             </div>
-      <% end %>
+        <% end %>
       </div>
   <% end %>
 </div>
@@ -112,13 +112,5 @@
       <% end %>
   <% end %>
 </div>
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js">
-</script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-<script type="text/javascript">
-    !window.jQuery && document.write('<script src="/javascripts/jquery-1.4.4.min.js"><\/script>')
-</script>
-<%= javascript_include_tag 'plugins.js', 'scripts.js' %>
 </body>
 </html>

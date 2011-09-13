@@ -1,11 +1,5 @@
 (function($) {
 
-    if (typeof window.console == "undefined" || typeof console.log == "undefined") {
-        window.console = {
-            log : function() {
-            }
-        };
-    }
 
     function id(el) {
         return $(el).attr('id').match(/\d+$/)[0];
@@ -13,6 +7,7 @@
 
     var csrf_token = $('meta[name=csrf-token]').attr('content');
     var taggings_path = $('meta[name=taggins_path]').attr('content');
+
     $(function() {
         $("#account .tag").draggable({revert: 'invalid', cursor: "move", helper: "clone" });
         $("li.movement").droppable({accept: '#account .tag',hoverClass: "selected", drop: function(event, ui) {
