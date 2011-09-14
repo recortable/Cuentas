@@ -15,12 +15,13 @@ gem "simple_form"
 gem "cancan"
 gem 'inherited_resources'
 gem 'kaminari'
-#gem 'squeel'
 gem 'newrelic_rpm'
-#gem 'nokogiri'
 
-# gem 'bj'
-# gem 'aws-s3', :require => 'aws/s3'
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
+
 
 group :development, :test do
   gem 'mongrel', '1.2.0.pre2'
