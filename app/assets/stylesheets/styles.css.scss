@@ -33,11 +33,11 @@ $font-title: 'Lobster', arial, serif;
 /** HELPERS **/
 @mixin container {width: 100%; overflow: hidden;}
 @mixin shadow {text-shadow: 0 1px 0 $bgdark;}
-@mixin positive {color: $green;}
-@mixin negative {color: $red;}
-@mixin ammount {color:$bgdarker;}
-@mixin actual {color: $black;}
-@mixin errors {color:$red;}
+.positive {color: $green;}
+.negative {color: $red;}
+.ammount {color:$bgdarker;}
+.actual {color: $black;}
+.errors {color:$red;}
 
 @mixin button {
   border-radius: 3px;

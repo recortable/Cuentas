@@ -14,13 +14,14 @@
             $(this).append("<div class='spinner'>spinner</div>");
             var movId = id(this);
             var tagId = id(ui.draggable);
-            $.post(taggings_path, {
+            $.post(taggings_path + ".js", {
                 'authenticity_token' : csrf_token,
                 'tagging[tag_id]' : tagId,
                 'tagging[movement_id]' : movId
             }, function(data) {
-                eval(data);
-            }, 'js');
+                console.log("Success!");
+                //eval(data);
+            });
         }
         });
 
@@ -46,12 +47,11 @@
             var text = prompt("Añade tu comentario:");
             var url = $(this).attr('href');
             $(this).append("<div class='spinner'>spinner</div>");
-            $.post(url, {
+            $.post(url + '.js', {
                 'authenticity_token' : csrf_token,
                 'body' : text
             }, function(data) {
-                eval(data);
-            }, 'js');
+            });
             return false;
         });
 
