@@ -20,6 +20,16 @@ role :db,  "recortable.net", :primary => true
 after "deploy:update_code", "config:copy_shared_configurations"
 after "deploy", "deploy:cleanup"
 
+
+# Add RVM's lib directory to the load path.
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+
+# Load RVM's capistrano plugin.
+require "rvm/capistrano"
+
+set :rvm_ruby_string, '1.9.2@rails31'
+set :rvm_type, :user  # Don't use system-wide RVM
+
 # Configuration Tasks
 namespace :config do
   desc "copy shared configurations to current"
